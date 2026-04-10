@@ -1,3 +1,14 @@
+# env
+.env
+
+# python
+venv/
 __pycache__/
 *.pyc
-.env
+
+# next
+.next/
+node_modules/
+
+# system
+.DS_Store

@@ -4,6 +4,9 @@ from pydantic import BaseModel
 import mysql.connector
 import random
 
+from nlp_service import analyze_text
+from reply_service import generate_reply
+
 app = FastAPI()
 
 app.add_middleware(
@@ -14,12 +17,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
+
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "ADT112141141",
-    "database": "emotion_universe"
+    "host": os.getenv("DB_HOST"),
+    "port": int(os.getenv("DB_PORT", 3306)),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME"),
 }
+
+
+# =========================
+# Pydantic Models
+# =========================
+class AnalyzeRequest(BaseModel):
+    text: str
+
 
 class MoodCreate(BaseModel):
     emotion: str
@@ -27,20 +45,82 @@ class MoodCreate(BaseModel):
     keep_type: str
     user_token: str
 
+
+class ReplyRequest(BaseModel):
+    emotion: str
+    text: str
+
+
+# =========================
+# DB Connection
+# =========================
 def get_db_connection():
     return mysql.connector.connect(**DB_CONFIG)
 
+
+# =========================
+# Root
+# =========================
 @app.get("/")
 def root():
     return {"message": "Emotion Universe API is running"}
 
+
+# =========================
+# Debug NLP Analyze
+# =========================
+@app.post("/analyze")
+def analyze(request: AnalyzeRequest):
+    slots = analyze_text(request.text)
+
+    # 這裡只是 debug 用，所以 emotion 先用 NLP 分析結果
+    reply = generate_reply(slots, request.text)
+
+    return {
+        "text": request.text,
+        "emotion": slots.get("emotion"),
+        "topic": slots.get("topic"),
+        "need": slots.get("need"),
+        "intensity": slots.get("intensity"),
+        "matched_keywords": slots.get("matched_keywords"),
+        "reply": reply
+    }
+
+
+# =========================
+# Generate Universe Reply
+# =========================
+@app.post("/reply")
+def create_reply(request: ReplyRequest):
+    slots = analyze_text(request.text)
+
+    # 使用者前端選的 emotion 為主
+    slots["emotion"] = request.emotion
+
+    reply = generate_reply(slots, request.text)
+
+    return {
+        "text": request.text,
+        "emotion": request.emotion,
+        "topic": slots.get("topic"),
+        "need": slots.get("need"),
+        "intensity": slots.get("intensity"),
+        "matched_keywords": slots.get("matched_keywords"),
+        "reply": reply
+    }
+
+
+# =========================
+# Get Moods
+# =========================
 @app.get("/moods")
 def get_moods():
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
     cursor.execute("""
-        SELECT * FROM moods
+        SELECT *
+        FROM moods
         WHERE keep_type = 'permanent'
            OR (keep_type = '24h' AND created_at >= NOW() - INTERVAL 1 DAY)
         ORDER BY created_at DESC
@@ -52,6 +132,10 @@ def get_moods():
 
     return results
 
+
+# =========================
+# Create Mood
+# =========================
 @app.post("/moods")
 def create_mood(mood: MoodCreate):
     db = get_db_connection()
@@ -63,10 +147,7 @@ def create_mood(mood: MoodCreate):
         "/assets/avatars/avatar3.png",
         "/assets/avatars/avatar4.png",
         "/assets/avatars/avatar5.png",
-
     ]
-
-
 
     sql = """
     INSERT INTO moods (emotion, content, author_name, avatar, keep_type, user_token)
@@ -74,7 +155,7 @@ def create_mood(mood: MoodCreate):
     """
 
     values = (
-        mood.emotion,
+        mood.emotion,              # 使用者前端自己選的情緒
         mood.text,
         "星旅人",
         random.choice(avatars),
@@ -90,8 +171,17 @@ def create_mood(mood: MoodCreate):
     cursor.close()
     db.close()
 
-    return {"message": "success", "id": inserted_id}
+    return {
+        "message": "success",
+        "id": inserted_id,
+        "emotion": mood.emotion,
+        "text": mood.text
+    }
 
+
+# =========================
+# Delete Mood
+# =========================
 @app.delete("/moods/{mood_id}")
 def delete_mood(mood_id: int, user_token: str):
     db = get_db_connection()
@@ -121,6 +211,10 @@ def delete_mood(mood_id: int, user_token: str):
 
     return {"message": "刪除成功", "id": mood_id}
 
+
+# =========================
+# Update Mood
+# =========================
 @app.put("/moods/{mood_id}")
 def update_mood(mood_id: int, mood: MoodCreate):
     db = get_db_connection()
@@ -151,7 +245,7 @@ def update_mood(mood_id: int, mood: MoodCreate):
     """
 
     values = (
-        mood.emotion,
+        mood.emotion,   # 仍然使用使用者重新選的情緒
         mood.text,
         mood.keep_type,
         mood_id
@@ -163,4 +257,9 @@ def update_mood(mood_id: int, mood: MoodCreate):
     cursor.close()
     db.close()
 
-    return {"message": "更新成功", "id": mood_id}
+    return {
+        "message": "更新成功",
+        "id": mood_id,
+        "emotion": mood.emotion,
+        "text": mood.text
+    }

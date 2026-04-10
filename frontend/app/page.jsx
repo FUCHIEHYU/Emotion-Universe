@@ -19,14 +19,7 @@ export default function HomePage() {
   const [selectedMonster, setSelectedMonster] = useState(null);
   const [showLaunch, setShowLaunch] = useState(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  function buildApiUrl(path) {
-    if (!API_URL) {
-      throw new Error("NEXT_PUBLIC_API_URL 尚未設定");
-    }
-    return `${API_URL}${path}`;
-  }
 
   const router = useRouter();
 

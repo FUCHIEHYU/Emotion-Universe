@@ -1,0 +1,714 @@
+.universePage {
+  position: relative;
+  min-height: 100vh;
+  padding: 12px 32px 60px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(120, 120, 255, 0.18), transparent 18%),
+    radial-gradient(circle at 20% 30%, rgba(255, 180, 230, 0.1), transparent 22%),
+    radial-gradient(circle at 80% 72%, rgba(180, 200, 255, 0.12), transparent 24%),
+    linear-gradient(180deg, #0c1030 0%, #171c4a 42%, #20255e 72%, #2a2c61 100%);
+}
+
+/* 背景層 */
+.universeBackground {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 星星層 */
+.starsLayer {
+  position: absolute;
+  inset: -20%;
+  background-repeat: repeat;
+  opacity: 0.9;
+}
+
+.starsLayer1 {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.95) 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(255,240,180,0.95) 1.2px, transparent 2px),
+    radial-gradient(circle, rgba(255,255,255,0.7) 0.8px, transparent 1.8px);
+  background-size: 160px 160px, 220px 220px, 120px 120px;
+  background-position: 0 0, 40px 70px, 90px 20px;
+  animation: starDrift1 80s linear infinite;
+}
+
+.starsLayer2 {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.85) 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(255,220,170,0.8) 1.2px, transparent 2px);
+  background-size: 240px 240px, 320px 320px;
+  background-position: 30px 50px, 100px 160px;
+  opacity: 0.55;
+  animation: starDrift2 120s linear infinite;
+}
+
+.starsLayer3 {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 2px);
+  background-size: 300px 300px;
+  background-position: 120px 40px;
+  opacity: 0.35;
+  animation: twinkleLayer 6s ease-in-out infinite;
+}
+
+/* 星雲 */
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+}
+
+.nebula1 {
+  width: 420px;
+  height: 420px;
+  top: 6%;
+  left: 18%;
+  background: radial-gradient(circle, rgba(165, 156, 255, 0.42), transparent 70%);
+  animation: nebulaFloat1 18s ease-in-out infinite;
+}
+
+.nebula2 {
+  width: 520px;
+  height: 520px;
+  top: 18%;
+  right: 10%;
+  background: radial-gradient(circle, rgba(120, 145, 255, 0.38), transparent 70%);
+  animation: nebulaFloat2 22s ease-in-out infinite;
+}
+
+.nebula3 {
+  width: 460px;
+  height: 460px;
+  bottom: 4%;
+  left: 40%;
+  background: radial-gradient(circle, rgba(255, 180, 225, 0.2), transparent 70%);
+  animation: nebulaFloat3 20s ease-in-out infinite;
+}
+
+/* 雲霧 */
+.cloudMist {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(55px);
+  opacity: 0.22;
+}
+
+.cloudMist1 {
+  width: 520px;
+  height: 140px;
+  bottom: 6%;
+  left: 5%;
+  background: rgba(210, 220, 255, 0.85);
+  animation: mistMove1 28s ease-in-out infinite;
+}
+
+.cloudMist2 {
+  width: 480px;
+  height: 120px;
+  bottom: 10%;
+  right: 4%;
+  background: rgba(255, 220, 245, 0.68);
+  animation: mistMove2 34s ease-in-out infinite;
+}
+
+/* 內容區 */
+.universeHero {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto 8px;
+  text-align: center;
+}
+
+.universeEyebrow {
+  margin-bottom: 10px;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: #d2d6ff;
+}
+
+.universeTitle {
+  margin: 0 0 14px;
+  font-size: clamp(34px, 5vw, 35px);
+  color: #ffffff;
+  line-height: 1.15;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.24);
+}
+
+.universeDesc {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #d8dcff;
+}
+
+/* 宇宙範圍 */
+.universeField {
+  position: relative;
+  z-index: 1;
+  width: min(1450px, 100%);
+  height: 82vh;
+  min-height: 680px;
+  margin: -70px auto 0;
+}
+
+
+/* 漂浮怪獸 */
+.floatingStar {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  animation: drift 6.5s ease-in-out infinite;
+  transition: filter 0.25s ease;
+  will-change: transform;
+}
+
+
+.floatingStar:hover {
+  filter: brightness(1.08);
+}
+
+
+.floatingStarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  animation: floatBreath 4s ease-in-out infinite;
+}
+
+/* 各情緒發光 */
+.star-joy .floatingStarImg {
+  filter: drop-shadow(0 0 30px rgba(255, 232, 159, 0.55));
+}
+
+.star-sad .floatingStarImg {
+  filter: drop-shadow(0 0 30px rgba(180, 225, 255, 0.55));
+}
+
+.star-fear .floatingStarImg {
+  filter: drop-shadow(0 0 30px rgba(210, 195, 255, 0.6));
+}
+
+.star-anger .floatingStarImg {
+  filter: drop-shadow(0 0 30px rgba(255, 180, 160, 0.55));
+}
+
+.star-surprise .floatingStarImg {
+  filter: drop-shadow(0 0 30px rgba(255, 205, 235, 0.58));
+}
+
+.star-disgust .floatingStarImg {
+  filter: drop-shadow(0 0 30px rgba(195, 235, 160, 0.58));
+}
+
+/* 詳細視窗 */
+.starModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 18, 35, 0.55);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 20px;
+}
+
+.starModal {
+  position: relative;
+  width: min(560px, 100%);
+  border-radius: 28px;
+  padding: 28px;
+  background: rgba(60, 58, 92, 0.96);
+  color: white;
+  box-shadow: 0 20px 60px rgba(20, 18, 40, 0.3);
+}
+
+.starModalClose {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.75);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.starModalTop {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.starModalImage {
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(255,255,255,0.3));
+}
+
+.starModalName {
+  margin: 0 0 10px;
+  font-size: 28px;
+}
+
+.starAuthorRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.starAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.starAuthorText {
+  font-size: 14px;
+  color: rgba(255,255,255,0.78);
+}
+
+.starModalContent {
+  border-radius: 20px;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.08);
+  line-height: 1.9;
+  color: #f3f1ff;
+  margin-bottom: 16px;
+}
+
+.starModalContent p {
+  margin: 0;
+}
+
+.starModalTime {
+  font-size: 13px;
+  color: rgba(255,255,255,0.62);
+  text-align: right;
+}
+
+/* 動畫 */
+@keyframes drift {
+  0% {
+    transform: translate(-50%, -50%) translateY(0px) translateX(0px);
+  }
+  20% {
+    transform: translate(-50%, -50%) translateY(-20px) translateX(12px);
+  }
+  40% {
+    transform: translate(-50%, -50%) translateY(-46px) translateX(-16px);
+  }
+  60% {
+    transform: translate(-50%, -50%) translateY(-24px) translateX(18px);
+  }
+  80% {
+    transform: translate(-50%, -50%) translateY(14px) translateX(-12px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes floatBreath {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes starDrift1 {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-120px, 80px, 0);
+  }
+}
+
+@keyframes starDrift2 {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(160px, 100px, 0);
+  }
+}
+
+@keyframes twinkleLayer {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes nebulaFloat1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -18px);
+  }
+}
+
+@keyframes nebulaFloat2 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-26px, 22px);
+  }
+}
+
+@keyframes nebulaFloat3 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(22px, -16px);
+  }
+}
+
+@keyframes mistMove1 {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(26px);
+  }
+}
+
+@keyframes mistMove2 {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-28px);
+  }
+}
+
+.deleteMoodButton {
+  margin-top: 14px;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: rgba(255, 180, 190, 0.18);
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.deleteMoodButton:hover {
+  background: rgba(255, 140, 160, 0.28);
+}
+
+.ownerActionRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.editMoodButton,
+.deleteMoodButton {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.editMoodButton {
+  background: rgba(180, 210, 255, 0.18);
+  color: #fff;
+}
+
+.editMoodButton:hover {
+  background: rgba(160, 195, 255, 0.28);
+}
+
+.deleteMoodButton {
+  background: rgba(255, 180, 190, 0.18);
+  color: #fff;
+}
+
+.deleteMoodButton:hover {
+  background: rgba(255, 140, 160, 0.28);
+}
+
+.editMoodTextarea {
+  width: 100%;
+  min-height: 140px;
+  border: none;
+  border-radius: 16px;
+  padding: 14px;
+  resize: vertical;
+  font-size: 15px;
+  line-height: 1.7;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.universeStats {
+  margin: 18px auto 0;
+  font-size: 15px;
+  color: #fffedf;
+  line-height: 1.8;
+}
+
+.universeStats span {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff3b0;
+  text-shadow: 0 0 12px rgba(255, 236, 160, 0.35);
+}
+
+
+.universeHero {
+  position: relative;
+}
+
+/*letter*/
+
+.letterNoticeCard {
+  position: absolute;
+  right: 1%;
+  top: 58%;
+  transform: translateY(-50%);
+  width: 240px;
+  min-width: 240px;
+  padding: 14px 12px;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.letterNoticeImage {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.letterNoticeText {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+}
+
+@media (max-width: 900px) {
+  .letterNoticeCard {
+    right: 4%;
+    top: 64%;
+    width: 180px;
+    min-width: 180px;
+    padding: 10px 8px;
+  }
+
+  .letterNoticeImage {
+    width: 88px;
+    height: 88px;
+  }
+
+  .letterNoticeText {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .letterNoticeCard {
+    position: static;
+    transform: none;
+    width: 100%;
+    min-width: 0;
+    margin: 18px auto 0;
+  }
+
+  .letterNoticeImage {
+    width: 78px;
+    height: 78px;
+  }
+
+  .letterNoticeText {
+    font-size: 0.9rem;
+  }
+}
+
+
+.letterNoticeCard {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  animation: noticeFloat 2.8s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.letterNoticeCard:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.letterNoticeImage {
+  width: 110px;
+  height: auto;
+  display: block;
+
+  filter: drop-shadow(0 10px 20px rgba(20, 18, 50, 0.25));
+
+  /* ✨ 呼吸發光 */
+  animation: letterGlow 3.2s ease-in-out infinite;
+  transition: transform 0.25s ease;
+}
+
+.letterNoticeCard:hover .letterNoticeImage {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+
+
+.letterNoticeText {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+
+  text-align: center;
+  line-height: 1.5;
+
+  text-shadow: 0 4px 14px rgba(10, 10, 30, 0.5);
+
+  max-width: 140px;
+}
+
+.starModal {
+  position: relative;
+}
+
+@keyframes noticeFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes letterGlow {
+  0%, 100% {
+    filter: drop-shadow(0 10px 20px rgba(20, 18, 50, 0.25))
+            drop-shadow(0 0 0 rgba(255, 240, 200, 0));
+  }
+  50% {
+    filter: drop-shadow(0 10px 20px rgba(20, 18, 50, 0.25))
+            drop-shadow(0 0 16px rgba(255, 240, 200, 0.35));
+  }
+}
+
+/* =========================
+   剛送出的新星星高亮效果
+   ========================= */
+
+.newStar {
+  position: relative;
+  z-index: 3;
+  animation: newStarPulse 2s ease-in-out infinite;
+}
+
+.newStar::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 244, 180, 0.9) 0%,
+    rgba(255, 228, 150, 0.55) 30%,
+    rgba(255, 205, 120, 0.28) 52%,
+    rgba(255, 255, 255, 0) 72%
+  );
+  filter: blur(10px);
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: -1;
+  animation: newStarAura 2.2s ease-in-out infinite;
+}
+
+.newStar .floatingStarImg {
+  filter:
+    drop-shadow(0 0 10px rgba(255, 244, 180, 0.65))
+    drop-shadow(0 0 20px rgba(255, 220, 120, 0.45));
+}
+
+/* 星星本體微微呼吸 */
+@keyframes newStarPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 外圈光暈擴散 */
+@keyframes newStarAura {
+  0% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,210 @@
+/* =========================
+   宇宙回信按鈕（右上：在叉叉下面）
+   ========================= */
+
+/* 記得 modal 容器要 position: relative */
+/*宇宙回信按鈕*/
+
+.starModal {
+  position: relative;
+}
+
+.modalLetterNoticeCard {
+  position: absolute;
+  right: 35px;
+  top: 40px;
+  z-index: 6;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  animation: modalLetterFloat 2.8s ease-in-out infinite;
+  transition: transform 0.22s ease;
+}
+
+.modalLetterNoticeCard:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.modalLetterNoticeImage {
+  width: 100px;
+  height: auto;
+  display: block;
+
+  filter: drop-shadow(0 8px 18px rgba(20, 18, 50, 0.22));
+  animation: modalLetterGlow 3.2s ease-in-out infinite;
+  transition: transform 0.25s ease;
+}
+
+.modalLetterNoticeCard:hover .modalLetterNoticeImage {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.modalLetterNoticeText {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+  text-shadow: 0 4px 12px rgba(10, 10, 30, 0.4);
+  white-space: nowrap;
+}
+
+.modalLetterNoticeCard::after {
+  content: "✨";
+  position: absolute;
+  top: -4px;
+  right: 2px;
+  font-size: 14px;
+  opacity: 0;
+  transform: scale(0.6);
+  animation: modalSparkle 4.5s infinite;
+}
+
+@keyframes modalLetterFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes modalLetterGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 8px 18px rgba(20, 18, 50, 0.22))
+      drop-shadow(0 0 0 rgba(255, 240, 200, 0));
+  }
+  50% {
+    filter: drop-shadow(0 8px 18px rgba(20, 18, 50, 0.22))
+      drop-shadow(0 0 14px rgba(255, 240, 200, 0.3));
+  }
+}
+
+@keyframes modalSparkle {
+  0%,
+  85%,
+  100% {
+    opacity: 0;
+    transform: scale(0.6) rotate(0deg);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.15) rotate(18deg);
+  }
+  95% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-10deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .modalLetterNoticeCard {
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .modalLetterNoticeImage {
+    width: 64px;
+  }
+
+  .modalLetterNoticeText {
+    font-size: 0.74rem;
+  }
+}
+
+
+.modalLetterTop {
+  position: absolute;
+  top: 18px;
+  right: 60px; /* 避開 X 按鈕 */
+
+  z-index: 6;
+
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  animation: modalLetterFloat 2.8s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.modalLetterTop:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+.modalLetterTopImage {
+  width: 68px;
+  height: auto;
+
+  filter: drop-shadow(0 8px 18px rgba(20, 18, 50, 0.22));
+
+  animation: modalLetterGlow 3.2s ease-in-out infinite;
+  transition: transform 0.25s ease;
+}
+
+.modalLetterTop:hover .modalLetterTopImage {
+  transform: rotate(-8deg) scale(1.08);
+}
+/* =========================
+   動畫
+   ========================= */
+
+@keyframes modalLetterFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes modalLetterGlow {
+  0%, 100% {
+    filter: drop-shadow(0 8px 18px rgba(20, 18, 50, 0.22))
+            drop-shadow(0 0 0 rgba(255, 240, 200, 0));
+  }
+  50% {
+    filter: drop-shadow(0 8px 18px rgba(20, 18, 50, 0.22))
+            drop-shadow(0 0 14px rgba(255, 240, 200, 0.3));
+  }
+}
+
+@keyframes modalSparkle {
+  0%, 85%, 100% {
+    opacity: 0;
+    transform: scale(0.6) rotate(0deg);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.15) rotate(18deg);
+  }
+  95% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-10deg);
+  }
+}
+
+/* =========================
+   手機版
+   ========================= */
+
+@media (max-width: 768px) {
+  .modalLetterTop {
+    top: 58px;
+    right: 14px;
+  }
+
+  .modalLetterTopImage {
+    width: 56px;
+  }
+}

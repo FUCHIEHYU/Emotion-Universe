@@ -1,0 +1,399 @@
+* {
+  box-sizing: border-box;
+}
+
+
+
+:root {
+  --bg: #f9f7f4;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+
+.blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  filter: blur(100px);
+  opacity: 0.8;
+}
+
+/*🎨 三顆光球（直接給你設計稿級）*/
+.blob1 {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 174, 218, 0.9) 0%,
+    rgba(255, 174, 218, 0.4) 40%,
+    transparent 80%
+  );
+}
+
+.blob2 {
+  background: radial-gradient(
+    circle at center,
+    rgba(151, 176, 255, 0.9) 0%,
+    rgba(151, 176, 255, 0.4) 40%,
+    transparent 80%
+  );
+}
+
+.blob3 {
+  background: radial-gradient(
+    circle at center,
+    rgba(196, 181, 255, 0.85) 0%,
+    rgba(196, 181, 255, 0.35) 40%,
+    transparent 80%
+  );
+}
+
+.blob1 {
+  top: 9%;
+  left: 3%;
+}
+
+.blob2 {
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.blob3 {
+  top: 15%;
+  left: 60%;
+}
+
+/* 卡牌整區 */
+.monster-grid-section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 0 30px;
+}
+
+/* 外層：決定橫向排列 */
+.monster-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  justify-content: center;
+}
+.monster-grid-section {
+  padding-top: 20px;
+}
+
+/* 卡片本體：直式內容 */
+.monster-card {
+  width: 100%;
+  min-height: 180px;
+  padding: 18px;
+
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between; /* ⭐ 左右分開 */
+  align-items: flex-end;          /* ⭐ 對齊底部 */
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+
+  transition: all 0.25s ease;
+}
+
+.monster-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(120, 130, 180, 0.18);
+}
+
+.monster-card.active {
+  border: 2px solid rgba(151, 155, 255, 0.55);
+  box-shadow: 0 0 0 6px rgba(151, 155, 255, 0.12);
+}
+
+.monster-img {
+  width: 110px;      /* ⭐ 放大 */
+  height: 110px;
+  object-fit: contain;
+
+  align-self: flex-start; /* ⭐ 靠上左 */
+}
+
+
+.monster-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2f3152;
+}
+
+.monster-subtitle {
+  font-size: 0.8rem;
+  color: #7b7fa3;
+}
+
+.monster-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* ⭐ 靠右 */
+  justify-content: flex-end; /* ⭐ 靠下 */
+}
+
+
+/* 桌機（預設） */
+.monster-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  justify-content: center;
+  gap: 28px;
+}
+
+/* 平板 */
+@media (max-width: 1024px) {
+  .monster-grid {
+    grid-template-columns: repeat(2, 240px);
+    justify-content: center;
+  }
+}
+
+/* 手機 */
+@media (max-width: 640px) {
+  .monster-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+.monster-card {
+  position: relative;
+}
+
+.monster-img {
+  transform: translateY(-10px); /* 微浮 */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+:root {
+  --bg: #f9f7f4;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+
+.blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  filter: blur(100px);
+  opacity: 0.8;
+}
+
+/*🎨 三顆光球（直接給你設計稿級）*/
+.blob1 {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 174, 218, 0.9) 0%,
+    rgba(255, 174, 218, 0.4) 40%,
+    transparent 80%
+  );
+}
+
+.blob2 {
+  background: radial-gradient(
+    circle at center,
+    rgba(151, 176, 255, 0.9) 0%,
+    rgba(151, 176, 255, 0.4) 40%,
+    transparent 80%
+  );
+}
+
+.blob3 {
+  background: radial-gradient(
+    circle at center,
+    rgba(196, 181, 255, 0.85) 0%,
+    rgba(196, 181, 255, 0.35) 40%,
+    transparent 80%
+  );
+}
+
+.blob1 {
+  top: 9%;
+  left: 3%;
+}
+
+.blob2 {
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.blob3 {
+  top: 15%;
+  left: 60%;
+}
+
+/* 卡牌整區 */
+.monster-grid-section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 0 30px;
+}
+
+/* 外層：決定橫向排列 */
+.monster-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  justify-content: center;
+}
+.monster-grid-section {
+  padding-top: 20px;
+}
+
+/* 卡片本體：直式內容 */
+.monster-card {
+  width: 100%;
+  min-height: 180px;
+  padding: 18px;
+
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between; /* ⭐ 左右分開 */
+  align-items: flex-end;          /* ⭐ 對齊底部 */
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+
+  transition: all 0.25s ease;
+}
+
+.monster-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(120, 130, 180, 0.18);
+}
+
+.monster-card.active {
+  border: 2px solid rgba(151, 155, 255, 0.55);
+  box-shadow: 0 0 0 6px rgba(151, 155, 255, 0.12);
+}
+
+.monster-img {
+  width: 110px;      /* ⭐ 放大 */
+  height: 110px;
+  object-fit: contain;
+
+  align-self: flex-start; /* ⭐ 靠上左 */
+}
+
+
+.monster-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2f3152;
+}
+
+.monster-subtitle {
+  font-size: 0.8rem;
+  color: #7b7fa3;
+}
+
+.monster-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* ⭐ 靠右 */
+  justify-content: flex-end; /* ⭐ 靠下 */
+}
+
+
+/* 桌機（預設） */
+.monster-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  justify-content: center;
+  gap: 28px;
+}
+
+/* 平板 */
+@media (max-width: 1024px) {
+  .monster-grid {
+    grid-template-columns: repeat(2, 240px);
+    justify-content: center;
+  }
+}
+
+/* 手機 */
+@media (max-width: 640px) {
+  .monster-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+.monster-card {
+  position: relative;
+}
+
+.monster-img {
+  transform: translateY(-10px); /* 微浮 */
+}
+
+/* ===== Scrollbar 整體 ===== */
+
+/* ===== 全站 scrollbar（Chrome / Edge / Safari） ===== */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(240, 216, 255, 0.95),
+    rgba(205, 189, 250, 0.95)
+  );
+  border-radius: 999px;
+
+  background-clip: padding-box;
+
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(248, 234, 255, 1),
+    rgba(196, 181, 253, 1)
+  );
+}
+

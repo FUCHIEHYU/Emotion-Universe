@@ -1,0 +1,300 @@
+.roomPage {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 70px;
+  text-align: center;
+}
+
+.roomTitle {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  color: #2f3152;
+}
+
+.roomIntro,
+.roomSubtitle {
+  color: #7a7f9c;
+  margin-bottom: 18px;
+  line-height: 1.8;
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 420px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #d8d1ef;
+  margin-bottom: 36px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.searchInput:focus {
+  border-color: #d3c5ff;
+  box-shadow: 0 0 0 4px rgba(188, 167, 254, 0.14);
+}
+
+.emotionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  perspective: 1000px;
+}
+
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 340px;   /* ⭐ 建議值 */
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+
+
+.card:hover .cardInner {
+  transform: rotateY(180deg);
+}
+
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  padding: 24px 20px;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  box-shadow: 0 14px 34px rgba(114, 94, 177, 0.08);
+}
+
+.emotionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+
+
+
+.card:hover .cardInner {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
+  border-radius: 26px;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 #ebc5ef;
+  border: 2px solid rgba(255, 169, 241, 0.08);
+}
+.cardFace::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* 正面 */
+.cardFront {
+  background: #ded6ff;
+  padding: 13px 10px 22px;
+  backdrop-filter: blur(12px);           /* ⭐ 毛玻璃 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardFrontTop {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px 1fr 52px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cardIcon {
+  font-size: 2.1rem;
+  color: #6e3d83;
+  text-align: left;
+}
+.cardStarTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2f2345;
+  margin: 0;
+}
+
+.cardNumber {
+  text-align: right;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #5e356d;
+}
+
+.cardShortDesc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #4f4862;
+  text-align: center;
+  margin: 0 0 14px;
+  min-height: 42px;
+}
+
+.emotionName {
+  font-size: 1.9rem;
+  line-height: 1.1;
+  color: #2c2740;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.emotionKey {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #473f60;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+}
+.cardImageBox {
+  width: 100%;
+  height: 150px;
+  background: #fffdfc;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.emotionImg {
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
+}
+
+
+/* 背面 */
+.cardBack {
+  transform: rotateY(180deg);
+  background: #dde1ff;
+  padding: 18px 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.backTitleRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  color: #7460b2;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.backTitleRow p {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1f1b2d;
+}
+
+.backInfoBox {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
+  padding: 14px 18px;
+}
+
+.backList {
+  margin: 0;
+  padding-left: 18px;
+  color: #222;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.cardFace {
+  overflow: hidden;
+}
+
+.backCornerImg {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+/*灰階未解鎖卡*/
+.lockedCard {
+  height: 340px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #f0f0f3 0%, #e5e5ea 100%);
+  box-shadow: 0 14px 34px rgba(100, 100, 120, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  filter: grayscale(1);
+  opacity: 0.9;
+}
+
+
+
+
+.lockedInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+.lockedTag {
+  font-size: 0.74rem;
+  letter-spacing: 2px;
+  color: #9b9ba8;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.lockedName {
+  font-size: 1.5rem;
+  color: #71717d;
+  margin: 0 0 8px;
+}
+
+.lockedDesc {
+  font-size: 0.92rem;
+  color: #9494a3;
+  margin: 0;
+}
+
+/*底部文案*/
+.roomEnding {
+  margin-top: 40px;
+  font-size: 1rem;
+  color: #8b84a7;
+  line-height: 1.8;
+}

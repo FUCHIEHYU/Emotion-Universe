@@ -1,0 +1,153 @@
+.navbar {
+  width: 100%;
+  padding: 10px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  background: rgba(237, 221, 246, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 24px rgba(70, 55, 100, 0.08);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* 左邊 Logo */
+.navbarLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+
+  font-weight: 700;
+  font-size: 18px;
+  color: #2f3152;
+  letter-spacing: 1px;
+}
+
+.logoImg {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* 右側整體 */
+.navbarRight {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* 中間連結 */
+.navbarLinks {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.navLink {
+  text-decoration: none;
+  font-size: 14px;
+  color: rgba(85, 52, 106, 0.78);
+  position: relative;
+  transition: 0.25s ease;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: rgb(179, 143, 208);
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #ffb7df, #aab8ff);
+  transition: 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* 右上角使用者 */
+.navUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #2f3152;
+  transition: 0.2s ease;
+}
+
+.navUser:hover {
+  background: rgba(255, 255, 255, 0.82);
+  transform: translateY(-1px);
+}
+
+.navAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navUsername {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 響應式：平板以下 */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .navbarLogo span {
+    font-size: 16px;
+  }
+
+  .navbarRight {
+    gap: 16px;
+  }
+
+  .navbarLinks {
+    gap: 16px;
+  }
+
+  .navLink {
+    font-size: 13px;
+  }
+}
+
+/* 響應式：手機以下 */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 10px 16px;
+  }
+
+  .navbarLogo span {
+    display: none;
+  }
+
+  .navbarLinks {
+    gap: 12px;
+  }
+
+  .navUsername {
+    display: none;
+  }
+}

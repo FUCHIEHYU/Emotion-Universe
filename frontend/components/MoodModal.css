@@ -1,0 +1,326 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 12, 30, 0.55);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 24px;
+}
+
+.moodModal {
+  position: relative;
+  width: min(980px, 92vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  border-radius: 30px;
+  padding: 32px 38px;
+  background: rgba(70, 71, 96, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(18, 18, 40, 0.22);
+  color: #f5f2ff;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #b9b3d8;
+}
+
+.modalContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 44px;
+}
+
+/* 左側 */
+.monsterPreview {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding-top: 34px;
+}
+
+.monsterGlow {
+  position: absolute;
+  top: 70px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 199, 233, 0.28), transparent 70%);
+  filter: blur(26px);
+  z-index: 0;
+}
+
+.modalMonsterImg {
+  position: relative;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.28));
+  margin-bottom: 18px;
+}
+
+.monsterIdentity {
+  position: relative;
+  z-index: 1;
+}
+
+.monsterName {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.monsterSubLabel {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #d2caef;
+}
+
+/* 右側 */
+.monsterInfo {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.selectedLabel {
+  margin: 0 0 14px;
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  color: #c3bbeb;
+  text-transform: uppercase;
+}
+
+.monsterDescription {
+  margin: 0 0 20px;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #f2efff;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.monsterSituations {
+  margin-bottom: 24px;
+}
+
+.monsterSituations ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #e6e0ff;
+  line-height: 2;
+}
+
+.monsterSituations li {
+  margin-bottom: 2px;
+}
+
+.moodTextarea {
+  width: 100%;
+  min-height: 130px;
+  border: none;
+  border-radius: 22px;
+  padding: 18px 20px;
+  font-size: 1rem;
+  line-height: 1.7;
+  resize: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.95);
+  color: #2f3152;
+  box-sizing: border-box;
+}
+
+.textCount {
+  margin-top: 8px;
+  text-align: right;
+  font-size: 0.82rem;
+  color: #c7c0e7;
+}
+
+.errorText {
+  margin-top: 10px;
+  color: #ffb7c5;
+  font-size: 0.92rem;
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 18px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f6b2dc, #aeb9ff);
+  color: #2f3152;
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.footerText {
+  margin-top: 16px;
+  font-size: 0.84rem;
+  line-height: 1.9;
+  color: #d6cff2;
+}
+
+/* 平板以下 */
+@media (max-width: 900px) {
+  .moodModal {
+    width: min(720px, 94vw);
+    padding: 28px 24px;
+  }
+
+  .modalContent {
+    gap: 28px;
+  }
+
+  .monsterPreview {
+    width: 200px;
+  }
+
+  .modalMonsterImg {
+    width: 126px;
+    height: 126px;
+  }
+
+  .monsterName {
+    font-size: 1.7rem;
+  }
+}
+
+/* 手機 */
+@media (max-width: 768px) {
+  .moodModal {
+    width: 94vw;
+    max-height: 90vh;
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+
+  .modalContent {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .monsterPreview {
+    width: 100%;
+    padding-top: 18px;
+  }
+
+  .monsterGlow {
+    top: 36px;
+  }
+
+  .monsterInfo {
+    width: 100%;
+  }
+
+  .monsterDescription,
+  .selectedLabel {
+    text-align: center;
+  }
+
+  .monsterSituations ul {
+    text-align: left;
+  }
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #e6e6f5;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #e6e6f5;
+}
+
+/* 隱藏原本 */
+.radio-option input {
+  display: none;
+}
+
+/* 外圈 */
+.custom-radio {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(200, 190, 255, 0.6);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* hover */
+.radio-option:hover .custom-radio {
+  border-color: #c4b5fd;
+}
+
+/* 選中 */
+.radio-option input:checked + .custom-radio {
+  background: linear-gradient(180deg, #e9ddff, #a78bfa);
+  border: none;
+  box-shadow: 0 0 6px rgba(167, 139, 250, 0.6);
+}
+
+.radio-option {
+  user-select: none;
+}
+
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap; /* 手機會自動換行 */
+}
+
+.radio-question {
+  font-size: 0.95rem;
+  color: #dcdcf5;
+  white-space: nowrap;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+
+.radio-option:hover {
+  background: rgba(255, 255, 255, 0.05);
+}

@@ -6,7 +6,7 @@ import ProfileForm from "../../components/ProfileForm";
 
 export default function SettingsPage() {
   const [username, setUsername] = useState("");
-  const [selectedAvatar, setSelectedAvatar] = useState("/assets/avatars/avatar1.PNG");
+  const [selectedAvatar, setSelectedAvatar] = useState("/assets/avatars/avatar1.png");
 
   useEffect(() => {
     const savedProfile = localStorage.getItem("userProfile");
@@ -14,7 +14,7 @@ export default function SettingsPage() {
     if (savedProfile) {
       const parsed = JSON.parse(savedProfile);
       setUsername(parsed.username || "");
-      setSelectedAvatar(parsed.avatar || "/assets/avatars/avatar1.PNG");
+      setSelectedAvatar(parsed.avatar || "/assets/avatars/avatar1.png");
     }
   }, []);
 

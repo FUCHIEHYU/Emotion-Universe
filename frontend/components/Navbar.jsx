@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbarLogo">
-        <img src="/assets/logo.PNG" alt="logo" className="logoImg" />
+        <img src="/assets/logo.png" alt="logo" className="logoImg" />
         <span>情緒宇宙 | EMOTION UNIVERSE</span>
       </div>
 

@@ -1,18 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Navbar from "../../components/Navbar";
 import "./cosmic-letter.css";
 import { useRouter, useSearchParams } from "next/navigation";
 
-function buildApiUrl(path) {
-  const API_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8001";
-
-  return `${API_URL}${path}`;
-}
-
-export default function CosmicLetterPage() {
+function CosmicLetterContent() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reply, setReply] = useState("");
@@ -34,13 +27,12 @@ export default function CosmicLetterPage() {
     setIsOpen(true);
     setSender(`From：${name}`);
 
-    // 已經有回信就不重打 API
     if (reply) return;
 
     try {
       setIsLoading(true);
 
-      const res = await fetch(buildApiUrl("/reply"), {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reply`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +50,7 @@ export default function CosmicLetterPage() {
       const data = await res.json();
 
       setTimeout(() => {
-        setReply(data.reply);
+        setReply(data.reply || "宇宙今天有點安靜，但它有收到你的心情。");
         setIsLoading(false);
       }, 900);
     } catch (error) {
@@ -130,5 +122,13 @@ export default function CosmicLetterPage() {
         </button>
       </main>
     </>
+  );
+}
+
+export default function CosmicLetterPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CosmicLetterContent />
+    </Suspense>
   );
 }

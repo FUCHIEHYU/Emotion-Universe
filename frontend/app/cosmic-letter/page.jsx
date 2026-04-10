@@ -5,6 +5,9 @@ import Navbar from "../../components/Navbar";
 import "./cosmic-letter.css";
 import { useRouter, useSearchParams } from "next/navigation";
 
+// 強制告訴 Next.js 這個頁面不需要在編譯時預渲染
+export const dynamic = 'force-dynamic';
+
 function CosmicLetterContent() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

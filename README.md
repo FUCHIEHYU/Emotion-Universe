@@ -129,7 +129,7 @@ REST API 設計與串接（FastAPI）
 
 ## Demo
 - Video Demo：已完成錄製
-- Live Demo：部署中
+- Live Demo：https://emotion-universe.vercel.app/
 - Frontend：Vercel
 - Backend：Render
 - Database：Aiven MySQL

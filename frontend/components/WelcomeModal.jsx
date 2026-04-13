@@ -1,11 +1,11 @@
 import "./WelcomeModal.css";
 
 const avatarOptions = [
-  "/assets/avatars/avatar1.PNG",
-  "/assets/avatars/avatar2.PNG",
-  "/assets/avatars/avatar3.PNG",
-  "/assets/avatars/avatar4.PNG",
-  "/assets/avatars/avatar5.PNG",
+  "/assets/avatars/avatar1.png",
+  "/assets/avatars/avatar2.png",
+  "/assets/avatars/avatar3.png",
+  "/assets/avatars/avatar4.png",
+  "/assets/avatars/avatar5.png",
 ];
 
 export default function WelcomeModal({

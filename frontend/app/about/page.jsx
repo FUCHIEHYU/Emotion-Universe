@@ -25,6 +25,7 @@ const selItems = [
     text: "練習以更健康、更合適的方式表達情緒與面對互動情境。",
   },
 ];
+
 <div className="tech-card"></div>
 const featureItems = [
   {
@@ -41,7 +42,7 @@ const featureItems = [
   },
   {
     title: "情緒宇宙",
-    text: "互動瀏覽他人情緒。",
+    text: "互動瀏覽他人情緒。系統提供情緒資料保存機制，使用者可選擇將情緒星體儲存為「24小時」或「永久保存」。",
     image: "/assets/about/about-feature-3.png",
     sel: "SEL｜社會覺察",
   },

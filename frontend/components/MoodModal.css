@@ -181,6 +181,14 @@
   cursor: not-allowed;
 }
 
+.submitHint {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #f3d8ff;
+  text-align: center;
+}
+
 .footerText {
   margin-top: 16px;
   font-size: 0.84rem;

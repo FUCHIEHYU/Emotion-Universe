@@ -228,11 +228,20 @@
 
 .feature-intro {
   max-width: 720px;
-  margin: 0 auto 24px;
+  margin: 0 auto 12px;
   text-align: left;
   font-size: 1.02rem;
   line-height: 1.9;
   color: #5f5877;
+}
+
+.feature-note {
+  max-width: 720px;
+  margin: 0 auto 24px;
+  text-align: left;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: #7a5170;
 }
 
 .feature-sel-tag {

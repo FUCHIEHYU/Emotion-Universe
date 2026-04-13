@@ -189,6 +189,12 @@ return (
               <button type="submit" className="submitButton" disabled={loading}>
                 {loading ? "送出中..." : "送出情緒星"}
               </button>
+
+              {loading && (
+                <p className="submitHint">
+                  小提醒：首次送出或一段時間未使用後，系統可能需要多等待幾秒，請稍候片刻 💫...
+                </p>
+              )}
             </form>
 
             <p className="footerText">

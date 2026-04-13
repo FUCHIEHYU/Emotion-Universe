@@ -207,6 +207,10 @@ export default function AboutPage() {
           以下功能設計皆結合 SEL 社會情緒學習概念，讓孩子在互動中自然練習情緒理解與表達。
         </div>
 
+        <p className="feature-note">
+          ✦小提醒：目前網站使用雲端免費伺服器，首次送出或閒置後重新操作時，可能需要等待幾秒，屬正常情況。
+        </p>
+
         <div className="feature-grid">
           {featureItems.map((item, index) => (
             <div key={index} className="feature-item">

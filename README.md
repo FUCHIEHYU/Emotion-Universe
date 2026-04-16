@@ -21,6 +21,7 @@ emotion, UI/UX, interaction, web, education, SEL, empathy, self-awareness, anony
 資料庫：MySQL
 架構：前後端分離（REST API）
 
+
 ## 系統架構
 
 Frontend (Next.js / React)
@@ -41,6 +42,8 @@ Database (MySQL)
 根據分析結果生成「宇宙回信」
 將情緒資料寫入資料庫
 此流程使系統不只是資料儲存，而是具備完整的資料處理與回應機制。
+
+
 
 # Dataflow
 User Input (Emotion + Text)
@@ -128,6 +131,25 @@ POST /analyze
 REST API 設計與串接（FastAPI）
 關聯式資料庫設計（MySQL）
 將互動設計與系統邏輯整合
+
+
+## (新增)建立系統韌性與可觀測性
+
+考量免費雲端服務（Render + Aiven）可能出現冷啟動與休眠問題，本專案進行以下優化：
+
+- 建立 `/health`、`/health/db`，用來檢查 API 與資料庫狀態
+- 加入 Retry 機制，避免資料庫暫時無法連線時直接失敗
+- 使用 Connection Pool 提升連線效率
+- 使用 `ping()` 確保連線有效
+- 當資料庫尚未就緒時回傳 503，而非 500
+- 前端提供 loading / 暖機提示，提升使用者體驗
+
+提升系統在雲端環境下的穩定性與可觀測性
+
+
+
+
+
 
 
 

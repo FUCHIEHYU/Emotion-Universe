@@ -46,6 +46,7 @@ Database (MySQL)
 
 
 # Dataflow
+```
 User Input (Emotion + Text)
         ↓
 Frontend (Next.js / React)
@@ -75,7 +76,7 @@ GET /moods：取得情緒宇宙中的資料列表
 POST /moods：新增一筆情緒資料
 PUT /moods/{mood_id}：更新指定情緒資料
 DELETE /moods/{mood_id}：刪除指定情緒資料
-
+```
 ## 核心模組：
 
 情緒分析（analyze_text）

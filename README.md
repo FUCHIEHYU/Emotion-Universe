@@ -21,7 +21,6 @@ emotion, UI/UX, interaction, web, education, SEL, empathy, self-awareness, anony
 資料庫：MySQL
 架構：前後端分離（REST API）
 
-
 ## 系統架構
 
 Frontend (Next.js / React)
@@ -30,52 +29,58 @@ Backend (FastAPI)
         ↓
 Text Processing Layer (NLP Analysis + Reply Generation)
         ↓
-Database (MySQL)
+Resilience Layer（Retry + Connection Pool + Ping）
+        ↓
+Database (MySQL - Aiven)
 
 前端負責使用者介面與互動體驗（情緒輸入、宇宙視覺呈現）；
 後端提供 API 並負責整體資料流程控制。
 
-當使用者提交情緒內容時，資料會進入後端的處理流程：
+為應對雲端服務冷啟動問題，後端在資料庫存取前加入：
+- Retry 機制（自動重試）
+- Connection Pool（連線重用）
+- Connection Ping（連線驗證）
 
-文字前處理與關鍵字分析（NLP）
-判斷情緒、主題、使用者需求與情緒強度
-根據分析結果生成「宇宙回信」
-將情緒資料寫入資料庫
+確保資料庫暫時未就緒時，系統仍能穩定運作。
+
+當使用者提交情緒內容時，資料會進入後端處理流程：
+
+- 文字前處理與關鍵字分析（NLP）
+- 判斷情緒、主題、需求與情緒強度
+- 根據分析結果生成「宇宙回信」
+- 經過韌性層後寫入資料庫
+
 此流程使系統不只是資料儲存，而是具備完整的資料處理與回應機制。
 
 
-
 # Dataflow
+```
 User Input (Emotion + Text)
         ↓
 Frontend (Next.js / React)
         ↓ API Request
 Backend (FastAPI)
-   ├── POST /analyze   → 分析文字內容
-   ├── POST /reply     → 生成宇宙回信
-   ├── GET /moods      → 取得情緒資料
-   ├── POST /moods     → 新增情緒資料
-   ├── PUT /moods/{id} → 更新情緒資料
+   ├── GET /health      → API 狀態檢查
+   ├── GET /health/db   → 資料庫狀態檢查
+   ├── POST /analyze    → 分析文字內容
+   ├── POST /reply      → 生成宇宙回信
+   ├── GET /moods       → 取得情緒資料
+   ├── POST /moods      → 新增情緒資料
+   ├── PUT /moods/{id}  → 更新情緒資料
    └── DELETE /moods/{id} → 刪除情緒資料
         ↓
 Text Processing Layer
 (NLP Analysis + Reply Generation)
+        ↓
+Resilience Layer
+(Retry + Connection Pool + Ping)
         ↓
 Database (MySQL)
         ↓
 Return Response
         ↓
 Frontend Rendering (Universe UI)
-
-# API Endpoints
-GET /：確認 API 服務是否正常運作
-POST /analyze：分析使用者輸入文字，回傳情緒、主題、需求與強度
-POST /reply：根據輸入內容與情緒生成宇宙回信
-GET /moods：取得情緒宇宙中的資料列表
-POST /moods：新增一筆情緒資料
-PUT /moods/{mood_id}：更新指定情緒資料
-DELETE /moods/{mood_id}：刪除指定情緒資料
-
+```
 ## 核心模組：
 
 情緒分析（analyze_text）
@@ -87,6 +92,8 @@ API 流程（FastAPI endpoints）
 前後端 API 串接
 MySQL 資料儲存
 宇宙回信（情緒分析 + 回應生成）
+
+
 ### Database
 - MySQL
 - Aiven MySQL Cloud Database
@@ -122,10 +129,12 @@ GET /moods
 POST /moods
 POST /reply
 POST /analyze
+```
 {
   "emotion": "anxious",
   "text": "今天有點焦慮，但還在努力撐著。"
 }
+```
 開發重點
 建立完整資料流（前端 → 後端 → 分析 → 資料庫）
 REST API 設計與串接（FastAPI）
@@ -163,10 +172,10 @@ REST API 設計與串接（FastAPI）
 
 ## 未來規劃
 
- ● 建立不當言論過濾機制，提升平台內容安全性
- ● 優化Rule-based 分析邏輯，導入更進階的回應生成方式（如 AI / LLM 模型）
- ● 優化並擴充情緒分類邏輯，提高分析準確度
- ● 探索應用於教育場域的可能性（如情緒教育與 SEL 教學輔助工具）
+ - 建立不當言論過濾機制，提升平台內容安全性
+ - 優化Rule-based 分析邏輯，導入更進階的回應生成方式（如 AI / LLM 模型）
+ - 優化並擴充情緒分類邏輯，提高分析準確度
+ - 探索應用於教育場域的可能性（如情緒教育與 SEL 教學輔助工具）
 
 
 ## 作者

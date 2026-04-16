@@ -17,6 +17,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from mysql.connector import pooling
+import time
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -54,8 +57,56 @@ class ReplyRequest(BaseModel):
 # =========================
 # DB Connection
 # =========================
+db_pool = pooling.MySQLConnectionPool(
+    pool_name="emotion_pool",
+    pool_size=5,
+    **DB_CONFIG
+)
+
 def get_db_connection():
-    return mysql.connector.connect(**DB_CONFIG)
+    return db_pool.get_connection()
+
+
+def get_db_connection_with_retry(retries=3, delay=3):
+    last_error = None
+
+    for _ in range(retries):
+        try:
+            conn = db_pool.get_connection()
+            conn.ping(reconnect=True, attempts=1, delay=0)
+            return conn
+        except Exception as e:
+            last_error = e
+            time.sleep(delay)
+
+    raise last_error
+
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "service": "api"}
+
+
+@app.get("/health/db")
+def health_db():
+    try:
+        conn = get_db_connection_with_retry()
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")
+        cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        return {"status": "ok", "service": "database"}
+
+    except Exception as e:
+        return {
+            "status": "error",
+            "service": "database",
+            "detail": str(e)
+        }
 
 
 # =========================
@@ -113,24 +164,34 @@ def create_reply(request: ReplyRequest):
 # =========================
 # Get Moods
 # =========================
+from fastapi import HTTPException
+
 @app.get("/moods")
 def get_moods():
-    db = get_db_connection()
-    cursor = db.cursor(dictionary=True)
+    try:
+        db = get_db_connection_with_retry()
+        cursor = db.cursor(dictionary=True)
 
-    cursor.execute("""
-        SELECT *
-        FROM moods
-        WHERE keep_type = 'permanent'
-           OR (keep_type = '24h' AND created_at >= NOW() - INTERVAL 1 DAY)
-        ORDER BY created_at DESC
-    """)
-    results = cursor.fetchall()
+        cursor.execute("""
+            SELECT *
+            FROM moods
+            WHERE keep_type = 'permanent'
+               OR (keep_type = '24h' AND created_at >= NOW() - INTERVAL 1 DAY)
+            ORDER BY created_at DESC
+        """)
 
-    cursor.close()
-    db.close()
+        results = cursor.fetchall()
 
-    return results
+        cursor.close()
+        db.close()
+
+        return results
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=503,
+            detail=f"database_waking_up: {str(e)}"
+        )
 
 
 # =========================

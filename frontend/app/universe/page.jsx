@@ -181,6 +181,9 @@ export default function UniversePage() {
   const [editText, setEditText] = useState("");
   const [editKeepType, setEditKeepType] = useState("24h");
   const [newMoodId, setNewMoodId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isWaking, setIsWaking] = useState(false);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
   const savedNewMoodId = localStorage.getItem("new_mood_id");
@@ -188,58 +191,58 @@ export default function UniversePage() {
     setNewMoodId(Number(savedNewMoodId));
   }
 }, []);
+useEffect(() => {
+  const fetchMoods = async () => {
+    setLoading(true);
+    setLoadError(false);
+    setIsWaking(false);
 
+    // ⏱️ 3秒後顯示暖機提示
+    const wakeTimer = setTimeout(() => {
+      setIsWaking(true);
+    }, 3000);
 
-  useEffect(() => {
-    const fetchMoods = async () => {
-      try {
-        const res = await fetch(buildApiUrl("/moods"));
+    try {
+      const res = await fetch(buildApiUrl("/moods"));
 
-
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-
-        const data = await res.json();
-        const positions = generatePositions(data.length);
-        const myToken = getUserToken();
-
-        const formatted = data.map((item, index) => ({
-          ...item,
-          starName: mapEmotionToMonster(item.emotion),
-          authorName: item.author_name,
-          createdAt: item.created_at
-            ? new Date(item.created_at).toLocaleString()
-            : "",
-          keepType: item.keep_type,
-          isMine: item.user_token === myToken,
-          isNew: Number(item.id) === Number(newMoodId),
-          x: `${positions[index].x}%`,
-          y: `${positions[index].y}%`,
-          size: positions[index].size,
-          floatDelay: `${Math.random() * 2.2}s`,
-          floatDuration: `${6 + Math.random() * 2.8}s`,
-        }));
-
-        setMoods(formatted);
-      } catch (error) {
-        console.error("抓取 moods 失敗：", error);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
-    };
 
-    fetchMoods();
-  }, [newMoodId]);
+      const data = await res.json();
+      const positions = generatePositions(data.length);
+      const myToken = getUserToken();
 
-  useEffect(() => {
-  if (!newMoodId) return;
+      const formatted = data.map((item, index) => ({
+        ...item,
+        starName: mapEmotionToMonster(item.emotion),
+        authorName: item.author_name,
+        createdAt: item.created_at
+          ? new Date(item.created_at).toLocaleString()
+          : "",
+        keepType: item.keep_type,
+        isMine: item.user_token === myToken,
+        isNew: Number(item.id) === Number(newMoodId),
+        x: `${positions[index].x}%`,
+        y: `${positions[index].y}%`,
+        size: positions[index].size,
+        floatDelay: `${Math.random() * 2.2}s`,
+        floatDuration: `${6 + Math.random() * 2.8}s`,
+      }));
 
-  const timer = setTimeout(() => {
-    setNewMoodId(null);
-    localStorage.removeItem("new_mood_id");
-  }, 5000);
+      setMoods(formatted);
+    } catch (error) {
+      console.error("抓取 moods 失敗：", error);
+      setLoadError(true); // ❗新增
+    } finally {
+      clearTimeout(wakeTimer); // ❗清掉 timer
+      setLoading(false);      // ❗結束 loading
+    }
+  };
 
-  return () => clearTimeout(timer);
+  fetchMoods();
 }, [newMoodId]);
+
 
   const handleDeleteMood = async (moodId) => {
     try {
@@ -390,6 +393,8 @@ const handleGoToLetterPage = (mood) => {
             </p>
           </button>
 
+
+
         </section>
 
 
@@ -479,8 +484,37 @@ const handleGoToLetterPage = (mood) => {
             </div>
           </div>
 
+
+
+
+
+
           
         )}
+
+          {/* 🌀 loading */}
+            {loading ? (
+              isWaking ? (
+                <div className="toastWrapper" key="warming">
+                  <div className="warmupBanner">
+                    <span className="animatedText">宇宙中心正在暖機中 🚀</span>
+                    由於使用雲端免費服務，首次啟動約需 15–30 秒，感謝您的耐心等待！
+                  </div>
+                </div>
+              ) : (
+                <div className="toastWrapper" key="loading">
+                  <div className="statusBanner">
+                    <span className="animatedText">🌠 正在連接情緒宇宙中...</span>
+                  </div>
+                </div>
+              )
+            ) : loadError ? (
+              <div className="toastWrapper" key="error">
+                <div className="errorBanner">
+                  目前宇宙連線較慢，可能正在喚醒伺服器或資料庫，請稍後重新整理。
+                </div>
+              </div>
+            ) : null}
 
 
       </main>

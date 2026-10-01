@@ -18,6 +18,7 @@ app.add_middleware(
 )
 
 from mysql.connector import pooling
+import threading
 import time
 
 from dotenv import load_dotenv
@@ -57,14 +58,30 @@ class ReplyRequest(BaseModel):
 # =========================
 # DB Connection
 # =========================
-db_pool = pooling.MySQLConnectionPool(
-    pool_name="emotion_pool",
-    pool_size=5,
-    **DB_CONFIG
-)
+# Built lazily (on first real DB use) instead of at import time, so that if
+# the database is offline/asleep, the process still starts and /health still
+# responds instead of the whole app hanging before it can even boot.
+db_pool = None
+_db_pool_lock = threading.Lock()
+
+
+def get_db_pool():
+    global db_pool
+
+    if db_pool is None:
+        with _db_pool_lock:
+            if db_pool is None:
+                db_pool = pooling.MySQLConnectionPool(
+                    pool_name="emotion_pool",
+                    pool_size=5,
+                    **DB_CONFIG
+                )
+
+    return db_pool
+
 
 def get_db_connection():
-    return db_pool.get_connection()
+    return get_db_pool().get_connection()
 
 
 def get_db_connection_with_retry(retries=3, delay=3):
@@ -72,7 +89,7 @@ def get_db_connection_with_retry(retries=3, delay=3):
 
     for _ in range(retries):
         try:
-            conn = db_pool.get_connection()
+            conn = get_db_pool().get_connection()
             conn.ping(reconnect=True, attempts=1, delay=0)
             return conn
         except Exception as e:
@@ -203,11 +220,11 @@ def create_mood(mood: MoodCreate):
     cursor = db.cursor()
 
     avatars = [
-        "/assets/avatars/avatar1.png",
-        "/assets/avatars/avatar2.png",
-        "/assets/avatars/avatar3.png",
-        "/assets/avatars/avatar4.png",
-        "/assets/avatars/avatar5.png",
+        "/assets/avatars/avatar1.webp",
+        "/assets/avatars/avatar2.webp",
+        "/assets/avatars/avatar3.webp",
+        "/assets/avatars/avatar4.webp",
+        "/assets/avatars/avatar5.webp",
     ]
 
     sql = """
@@ -254,12 +271,12 @@ def delete_mood(mood_id: int, user_token: str):
     if not mood:
         cursor.close()
         db.close()
-        return {"message": "找不到這顆情緒星"}
+        return {"code": "MOOD_NOT_FOUND"}
 
     if mood["user_token"] != user_token:
         cursor.close()
         db.close()
-        return {"message": "你不能刪除別人的情緒星"}
+        return {"code": "NOT_OWNER_DELETE"}
 
     cursor.close()
 
@@ -270,7 +287,7 @@ def delete_mood(mood_id: int, user_token: str):
     cursor.close()
     db.close()
 
-    return {"message": "刪除成功", "id": mood_id}
+    return {"message": "success", "id": mood_id}
 
 
 # =========================
@@ -287,12 +304,12 @@ def update_mood(mood_id: int, mood: MoodCreate):
     if not existing_mood:
         cursor.close()
         db.close()
-        return {"message": "找不到這顆情緒星"}
+        return {"code": "MOOD_NOT_FOUND"}
 
     if existing_mood["user_token"] != mood.user_token:
         cursor.close()
         db.close()
-        return {"message": "你不能編輯別人的情緒星"}
+        return {"code": "NOT_OWNER_EDIT"}
 
     cursor.close()
     cursor = db.cursor()
@@ -319,7 +336,7 @@ def update_mood(mood_id: int, mood: MoodCreate):
     db.close()
 
     return {
-        "message": "更新成功",
+        "message": "success",
         "id": mood_id,
         "emotion": mood.emotion,
         "text": mood.text

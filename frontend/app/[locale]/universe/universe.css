@@ -763,3 +763,39 @@
     text-shadow: 0 0 4px rgba(255, 220, 150, 0.2);
   }
 }
+/* Mobile: tighter page padding, smaller hero text, shorter star field. */
+@media (max-width: 640px) {
+  .universePage {
+    padding: 12px 16px 48px;
+  }
+
+  .universeTitle {
+    font-size: clamp(26px, 7.5vw, 32px);
+  }
+
+  .universeDesc {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .universeField {
+    min-height: 520px;
+    height: 70vh;
+    margin-top: 0;
+  }
+
+  .toastWrapper {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .starModalOverlay {
+    padding: 14px;
+  }
+
+  .starModal {
+    padding: 22px 18px;
+    max-height: calc(100vh - 28px);
+    overflow-y: auto;
+  }
+}

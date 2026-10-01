@@ -85,46 +85,13 @@ export default function HomePage() {
       <div className="min-h-screen">
         <Navbar />
 
-        <main
-          style={{
-            maxWidth: "1500px",
-            margin: "0 auto",
-            padding: "20px 32px 50px",
-          }}
-        >
-          <section style={{ textAlign: "center", marginBottom: "10px" }}>
-            <p
-              style={{
-                fontSize: "18px",
-                letterSpacing: "4px",
-                color: "#7b7fa3",
-                marginBottom: "14px",
-              }}
-            >
-              {t("eyebrow")}
-            </p>
+        <main className="homeMain">
+          <section className="homeHero">
+            <p className="homeEyebrow">{t("eyebrow")}</p>
 
-            <h1
-              style={{
-                fontSize: "clamp(42px, 6vw, 35px)",
-                fontWeight: 600,
-                color: "#2f3152",
-                marginBottom: "18px",
-                lineHeight: 1.1,
-              }}
-            >
-              {t("heading")}
-            </h1>
+            <h1 className="homeTitle">{t("heading")}</h1>
 
-            <p
-              style={{
-                fontSize: "16px",
-                color: "#7b7fa3",
-                marginBottom: "20px",
-              }}
-            >
-              {t("subheading")}
-            </p>
+            <p className="homeSubtitle">{t("subheading")}</p>
           </section>
 
           <MonsterGrid

@@ -298,3 +298,103 @@
   color: #8b84a7;
   line-height: 1.8;
 }
+/* Mobile: compact cards so one screen shows a full card plus a peek of the
+   next one instead of a single oversized card. */
+@media (max-width: 640px) {
+  .roomPage {
+    padding: 24px 16px 48px;
+  }
+
+  .roomTitle {
+    font-size: 1.9rem;
+  }
+
+  .roomIntro,
+  .roomSubtitle {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .emotionGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .cardInner,
+  .lockedCard {
+    height: 270px;
+  }
+
+  .cardFace {
+    border-radius: 24px;
+    box-shadow: 6px 6px 0 #ebc5ef;
+  }
+
+  .cardFront {
+    padding: 12px 14px 14px;
+  }
+
+  .cardFrontTop {
+    margin-bottom: 10px;
+  }
+
+  .cardIcon {
+    font-size: 1.6rem;
+  }
+
+  .cardStarTitle {
+    font-size: 1.25rem;
+  }
+
+  .cardImageBox {
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 18px;
+  }
+
+  .emotionImg {
+    width: 76px;
+    height: 76px;
+  }
+
+  .cardShortDesc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    min-height: 0;
+  }
+
+  .emotionName {
+    font-size: 1.5rem;
+  }
+
+  .cardBack {
+    padding: 14px 14px 12px;
+  }
+
+  .backTitleRow {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .backTitleRow p {
+    font-size: 1rem;
+  }
+
+  .backInfoBox {
+    padding: 8px 14px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+  }
+
+  .backList {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .roomEnding {
+    margin-top: 28px;
+    font-size: 0.92rem;
+  }
+}

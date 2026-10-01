@@ -425,10 +425,13 @@
     max-width: 100%;
   }
 
+  /* The glows are positioned against the viewport (.about-bg is not a
+     positioned box), so a negative right offset pushed them past the right
+     edge and created horizontal overflow. */
   .hero-glow1 {
     width: 150px;
     height: 150px;
-    left: -20px;
+    left: 0;
   }
 
   .hero-glow2 {
@@ -439,7 +442,7 @@
   .hero-glow3 {
     width: 150px;
     height: 150px;
-    right: -20px;
+    right: 0;
   }
 }
 
@@ -595,4 +598,100 @@
 
 .feature-item:active {
   transform: translateY(-2px) scale(0.99);
+}
+
+/* ==========================================================================
+   Responsive overrides for the feature / tech grids.
+
+   These MUST stay at the end of the file. The earlier @media (max-width:768px)
+   blocks that set `.feature-grid { grid-template-columns: 1fr }` sit above the
+   base `.feature-grid { repeat(4, 1fr) }` / `.feature-card` rules, so with equal
+   specificity the later base rules won and the 4-column desktop layout was
+   used on phones. That made the page ~2x wider than the screen and iOS Safari
+   zoomed out, leaving all content in the left half of the viewport.
+   Breakpoints: desktop > 1024, tablet 641-1024, mobile <= 640.
+   ========================================================================== */
+.about-wrapper,
+.about-section,
+.about-card,
+.feature-item,
+.feature-card,
+.tech-card {
+  min-width: 0;
+}
+
+.about-card p,
+.feature-card p,
+.tech-card p,
+.feature-intro,
+.feature-note {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.feature-grid,
+.tech-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tech-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .tech-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .about-wrapper {
+    padding: 92px 16px 48px;
+  }
+
+  .feature-grid,
+  .tech-grid,
+  .sel-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .feature-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .feature-card {
+    min-height: auto;
+    padding: 18px 16px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.15rem;
+  }
+
+  .feature-card p {
+    font-size: 0.96rem;
+  }
+
+  .feature-sel-tag {
+    font-size: 0.78rem;
+    padding: 7px 12px;
+  }
+
+  .tech-card {
+    max-width: 100%;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
 }

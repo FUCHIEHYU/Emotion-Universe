@@ -1,0 +1,282 @@
+{
+  "metadata": {
+    "title": "What's Your Mood Today",
+    "description": "Emotion Universe"
+  },
+  "nav": {
+    "logoText": "EMOTION UNIVERSE",
+    "home": "Home",
+    "universe": "Universe",
+    "room": "Emotion Wiki",
+    "about": "About",
+    "localeSwitch": "中文"
+  },
+  "home": {
+    "eyebrow": "What's Your Mood Today?",
+    "heading": "Which little emotion monster are you today?",
+    "subheading": "Pick your emotion, write down how you feel, and let it fly into the universe.",
+    "nicknameRequired": "Please enter a nickname first"
+  },
+  "welcomeModal": {
+    "siteTitle": "What's Your Mood Today?",
+    "title": "Welcome to Emotion Universe",
+    "subtitle": "Pick an avatar and a name to begin your anonymous emotional journey.",
+    "chooseAvatar": "Choose your avatar",
+    "nicknameLabel": "Your nickname",
+    "nicknamePlaceholder": "e.g. Little Orange Star Traveler",
+    "notice1": "Your real identity is never shown here.",
+    "notice2": "Others will only see your avatar and nickname.",
+    "notice3": "Every mood becomes a little star in the universe.",
+    "startButton": "Start My Journey"
+  },
+  "profileForm": {
+    "brandTitle": "What's your mood today?",
+    "title": "My Star Traveler Settings",
+    "subtitle": "Pick an avatar and a name for yourself, and leave your feelings in the Emotion Universe anonymously.",
+    "previewLabel": "Your Star Traveler",
+    "previewDefaultName": "Star Traveler",
+    "chooseAvatar": "Choose your avatar",
+    "nicknameLabel": "Your nickname",
+    "nicknamePlaceholder": "e.g. Little Orange Star Traveler",
+    "notice1": "Tip: your real identity is never shown here — feel free to write down how you really feel today.",
+    "notice2": "Others will only see your avatar and nickname.",
+    "notice3": "You can always come back to this page to update your info.",
+    "defaultSaveButton": "Save Settings"
+  },
+  "settingsPage": {
+    "saveButton": "Save My Settings",
+    "nicknameRequired": "Please enter a nickname first",
+    "saved": "Settings saved!"
+  },
+  "monsters": {
+    "joy": {
+      "name": "Sunny",
+      "label": "Happiness",
+      "description": "When you feel light, happy, and everything is just right, Sunny shows up.",
+      "situations": ["Chatting happily with friends", "Finishing something you're proud of", "Enjoying life's little pleasures"]
+    },
+    "sad": {
+      "name": "Rainy",
+      "label": "Sadness",
+      "description": "When you feel down, let down, or a little sad, Rainy stays by your side.",
+      "situations": ["Things didn't go as expected", "Feeling lonely or overlooked", "Recalling something sad"]
+    },
+    "fear": {
+      "name": "Foggy",
+      "label": "Fear",
+      "description": "When you feel uneasy, tense, or afraid of the unknown, Foggy shows up.",
+      "situations": ["Facing an unknown challenge", "Worrying about an uncertain future", "Having to make an important decision"]
+    },
+    "anger": {
+      "name": "Blazy",
+      "label": "Anger",
+      "description": "When you feel treated unfairly, offended, or overwhelmed by pressure, Blazy shows up.",
+      "situations": ["Being misunderstood", "Things not going as expected", "Pressure building up for too long"]
+    },
+    "surprise": {
+      "name": "Sparky",
+      "label": "Surprise",
+      "description": "When something sudden or unexpected happens, Sparky appears in a flash.",
+      "situations": ["Receiving unexpected news", "Being surprised by a friend", "Discovering something new"]
+    },
+    "disgust": {
+      "name": "Cleany",
+      "label": "Disgust",
+      "description": "When you feel repelled, uncomfortable, or want to distance yourself from something, Cleany shows up.",
+      "situations": ["Encountering something you dislike", "Being in an uncomfortable environment", "Feeling a sense of rejection inside"]
+    }
+  },
+  "moodModal": {
+    "closeAria": "Close",
+    "commonSituations": "Common situations:",
+    "placeholder": "Write down how you feel right now...",
+    "keepQuestion": "How long should this emotion star stay?",
+    "keep24h": "24 hours",
+    "keepPermanent": "Keep forever",
+    "submit": "Send Emotion Star",
+    "submitting": "Sending...",
+    "submitHint": "Note: the first submission, or one after a period of inactivity, may take a few extra seconds. Thanks for your patience 💫...",
+    "footerLine1": "Every mood sent into the Emotion Universe is anonymous ✨",
+    "footerLine2": "Go take a look at what emotion stars others have sent today 💖",
+    "errorEmpty": "Please write down how you feel first",
+    "errorSubmitFailed": "Failed to send, please try again later"
+  },
+  "launchTransition": {
+    "flameAlt": "Flame trail",
+    "shipAlt": "Emotion star ship",
+    "text": "Your emotion star is flying into the universe..."
+  },
+  "room": {
+    "title": "Emotion Wiki",
+    "intro": "This page is based on Ekman's six basic emotions: joy, sadness, anger, fear, surprise, and disgust.",
+    "subtitle": "Emotions aren't good or bad — sometimes we feel more than one at once.",
+    "possibleSituations": "Possible situations",
+    "tryThis": "Try this",
+    "lockedTag": "new emotion star",
+    "lockedDesc": "Not unlocked yet, stay tuned...",
+    "ending": "There are so many emotions — more emotion stars are slowly being born in the universe. Stay tuned ✦",
+    "upcoming": ["Anticipation Star", "Shy Star", "Lonely Star", "Anxious Star", "Wronged Star", "Envy Star"],
+    "emotions": {
+      "joy": {
+        "starName": "Sunny Star",
+        "name": "Joy",
+        "description": "Joy often shows up when things go well, when you feel understood, or when you feel accompanied.",
+        "situations": ["Chatting with friends", "Achieving a goal", "Being praised"],
+        "coping": ["Remember this happiness", "Share the good mood", "Let yourself enjoy the moment"]
+      },
+      "sad": {
+        "starName": "Rainy Star",
+        "name": "Sadness",
+        "description": "You may feel sad when you experience loss, being ignored, or getting hurt.",
+        "situations": ["Being misunderstood", "A relationship changing", "Things not going as expected"],
+        "coping": ["Allow yourself to feel sad", "Talk to someone", "Write down your feelings"]
+      },
+      "anger": {
+        "starName": "Blazy Star",
+        "name": "Anger",
+        "description": "Anger tends to appear when your boundaries are crossed or something feels unfair.",
+        "situations": ["Being offended", "Being ignored", "Being treated unfairly"],
+        "coping": ["Take a deep breath", "Step away from the situation", "Express how you feel"]
+      },
+      "fear": {
+        "starName": "Foggy Star",
+        "name": "Fear",
+        "description": "Fear arises when facing the unknown or under pressure.",
+        "situations": ["Exams", "Unfamiliar environments", "High-pressure situations"],
+        "coping": ["Break the problem down", "Seek support", "Take it slow"]
+      },
+      "surprise": {
+        "starName": "Sparky Star",
+        "name": "Surprise",
+        "description": "You feel surprised when something unexpected happens.",
+        "situations": ["A sudden event", "Unexpected news", "A sudden change"],
+        "coping": ["Pause for a moment", "Understand the situation", "Then react"]
+      },
+      "disgust": {
+        "starName": "Cleany Star",
+        "name": "Disgust",
+        "description": "Disgust shows up when you encounter something uncomfortable or repulsive.",
+        "situations": ["A smell you dislike", "An uncomfortable sight", "A behavior you reject"],
+        "coping": ["Move away from the source", "Protect your boundaries"]
+      }
+    }
+  },
+  "universe": {
+    "eyebrow": "EMOTION UNIVERSE",
+    "title": "Floating in the universe are everyone's emotion stars today",
+    "desc": "Open one up to see which anonymous traveler it came from, and the feeling they left behind.",
+    "statsText": "There are currently {count} stars shining in the universe ✨",
+    "letterNoticeText": "Click an emotion star to get a letter from the universe! 💌",
+    "letterAlt": "Cosmic letter notice",
+    "starImageAlt": "Cosmic letter",
+    "modalLetterText": "Cosmic Letter 💌",
+    "keepPermanent": "Kept forever",
+    "keep24h": "24-hour",
+    "edit": "Edit",
+    "deleteStar": "Delete this emotion star",
+    "editTitle": "Edit your emotion star",
+    "keepQuestionOption24h": "24 hours",
+    "keepQuestionOptionPermanent": "Keep forever",
+    "saveEdit": "Save changes",
+    "warmingText": "The universe core is warming up 🚀",
+    "warmingHint": "Since we run on a free cloud service, the first start-up can take 15-30 seconds. Thanks for your patience!",
+    "connectingText": "🌠 Connecting to the Emotion Universe...",
+    "errorText": "The universe connection is currently slow — the server or database may be waking up. Please refresh in a moment.",
+    "deleteFailedFallback": "Failed to delete",
+    "updateFailedFallback": "Failed to update",
+    "backToUniverse": "← Back to the Universe",
+    "unknownEmotion": "Unknown emotion"
+  },
+  "cosmicLetter": {
+    "openAria": "Open the cosmic letter",
+    "closeAria": "Close the cosmic letter",
+    "letterAlt": "Cosmic letter",
+    "loadingText": "The universe is putting its thoughts into words for you...",
+    "hintOpen": "Tap to close this letter",
+    "hintClosed": "Tap to open 💌",
+    "defaultSender": "the Universe",
+    "senderPrefix": "From: ",
+    "fallbackReply": "The universe is a bit quiet today, but it did receive your feelings.",
+    "errorReply": "The universe isn't receiving a signal right now — please try again later.",
+    "backToUniverse": "← Back to the Universe"
+  },
+  "errors": {
+    "MOOD_NOT_FOUND": "This emotion star could not be found",
+    "NOT_OWNER_DELETE": "You can't delete someone else's emotion star",
+    "NOT_OWNER_EDIT": "You can't edit someone else's emotion star",
+    "UNKNOWN": "Something went wrong, please try again later"
+  },
+  "about": {
+    "heroTitle": "About Emotion Universe",
+    "heroSubtitle": "An interactive site that combines SEL with visualization to help you understand emotions and express feelings",
+    "introTitle": "Site Overview",
+    "introLead1": "Emotion Universe is an interactive site built around ",
+    "introLeadStrong": "Social and Emotional Learning (SEL)",
+    "introLead2": ", using ",
+    "introLeadStrong2": "visual design to help users understand their own and others' emotions",
+    "introLead3": ".",
+    "introBody1": "Through emotion monsters, an anonymous sharing mechanism, and a universe-style interactive scene, the site helps children explore their inner feelings, express emotions, and naturally practice understanding, empathy, and connection while viewing others' stories.",
+    "introHighlightPre": "We hope this is more than just a mood-journaling tool — we hope it's a ",
+    "introHighlightStrong": "digital emotional-learning space where children can safely feel their own emotions and learn to understand others",
+    "introHighlightPost": ".",
+    "conceptTitle": "Core Educational Concept",
+    "conceptBody1Pre": "Social and Emotional Learning (SEL) is an educational approach focused on children's ",
+    "conceptBody1Strong": "social and emotional management",
+    "conceptBody1Mid": ". Proposed by CASEL (the Collaborative for Academic, Social, and Emotional Learning) in the US, it is a form of emotional education that includes ",
+    "conceptBody1Strong2": "understanding one's own and others' emotions, managing stress, empathy, and social skills",
+    "conceptBody1Post": ".",
+    "conceptBody2Pre": "Through mood journaling, anonymous sharing, and interacting with the Emotion Universe, we hope children can gradually build emotional understanding and social skills through natural participation, so that ",
+    "conceptBody2Strong": "emotional education isn't just explained, but seen, felt, and practiced",
+    "conceptBody2Post": ".",
+    "featuresTitle": "Core Features",
+    "featuresIntro": "Every feature below is designed around SEL concepts, so children can naturally practice understanding and expressing emotions through interaction.",
+    "featuresNote": "✦ Note: this site currently runs on a free cloud server, so the first submission or the first action after being idle may take a few seconds — this is expected.",
+    "feature1Title": "Emotion Selection & Categorization",
+    "feature1Text": "Anonymous mood logging and sharing, kept for 24 hours or forever in the public universe.",
+    "feature1Sel": "SEL | Self-awareness",
+    "feature2Title": "Emotion Wiki",
+    "feature2Text": "Emotions presented as cards, helping you understand different feelings visually.",
+    "feature2Sel": "SEL | Self-awareness & Social awareness",
+    "feature3Title": "Emotion Universe",
+    "feature3Text": "Browse others' emotions interactively. Users can choose to keep their emotion stars for 24 hours or forever.",
+    "feature3Sel": "SEL | Social awareness",
+    "feature4Title": "Cosmic Letter",
+    "feature4Text": "Your mood journal is analyzed with NLP, then answered with an AI-generated response.",
+    "feature4Sel": "SEL | Self-management",
+    "techTitle": "Technical Architecture",
+    "tech1Title": "Next.js + React",
+    "tech1Line1": "Built the page structure with the App Router",
+    "tech1Line2": "Managed interactive state with React hooks (useState / useEffect)",
+    "tech1Line3": "Responsible for the frontend UI and connecting it to the backend API",
+    "tech2Title": "FastAPI",
+    "tech2Line1": "Built API endpoints such as /moods and /reply",
+    "tech2Line2": "Handled mood data and reply logic",
+    "tech2Line3": "Acted as the service layer between the frontend and the database",
+    "tech3Title": "MySQL",
+    "tech3Line1": "Designed the basic table structure for mood data",
+    "tech3Line2": "Wrote queries and filter conditions",
+    "tech3Line3": "Configured data retention and display rules as needed",
+    "tech4Title": "NLP Emotion Analysis",
+    "tech4Line1Strong": "Rule-based NLP",
+    "tech4Line1Rest": " performs the emotion analysis",
+    "tech4Line2": "Determines emotion, topic, need, and intensity fields",
+    "tech4Line3": "Doesn't rely on any paid external API",
+    "tech5Title": "Custom Art + Visual Design",
+    "tech5Line1": "Designed characters and star visuals from scratch",
+    "tech5Line2": "Built CSS animations (e.g. floating, envelope interaction)",
+    "tech5Line3": "Integrated visual design with frontend implementation",
+    "tech6Title": "Cloud Deployment",
+    "tech6Line1Strong": "Vercel",
+    "tech6Line1Rest": " for frontend deployment",
+    "tech6Line2Strong": "Render",
+    "tech6Line2Rest": " for FastAPI and MySQL deployment",
+    "tech6Line3": "Frontend connects to cloud APIs and cloud data services",
+    "impactTitle": "The Impact We Hope to Make",
+    "impactBody1": "In Emotion Universe, every emotion is like a star in the universe — deserving to be seen and understood.",
+    "impactBody2": "We hope children in this space learn not only to say \"here's how I feel right now\", but also gradually understand that \"others feel differently too\", building deeper self-understanding, empathy, and the ability to express emotions.",
+    "contactTitle": "Contact Us",
+    "contactBody": "We care about your experience — please reach out if you run into any issues.",
+    "contactEmail": "Email: fchiehyu@gmail.com",
+    "footer": "© 2026 Emotion Universe. | Designed by FUCHIEHYU for emotion star explorers 💖"
+  }
+}

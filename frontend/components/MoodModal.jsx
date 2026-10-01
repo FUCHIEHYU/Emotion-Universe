@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import "./MoodModal.css";
 
 function getOrCreateUserToken() {
@@ -22,6 +24,7 @@ export default function MoodModal({
   onSuccess,
   onLaunchStart,
 }) {
+  const t = useTranslations("moodModal");
   const [text, setText] = useState("");
   const [keepType, setKeepType] = useState("24h");
   const [loading, setLoading] = useState(false);
@@ -42,12 +45,12 @@ if (!isOpen || !monster) return null;
     resetForm();
     onClose();
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!text.trim()) {
-      setError("請先寫下你現在的感受");
+      setError(t("errorEmpty"));
       return;
     }
 
@@ -71,7 +74,7 @@ if (!isOpen || !monster) return null;
       });
 
       if (!res.ok) {
-        throw new Error("送出失敗");
+        throw new Error(t("errorSubmitFailed"));
       }
 
       const newMood = await res.json();
@@ -91,7 +94,7 @@ if (!isOpen || !monster) return null;
       handleClose();
     } catch (err) {
       console.error(err);
-      setError("送出失敗，請稍後再試");
+      setError(t("errorSubmitFailed"));
     } finally {
       setLoading(false);
     }
@@ -111,7 +114,7 @@ return (
           type="button"
           className="closeButton"
           onClick={handleClose}
-          aria-label="關閉"
+          aria-label={t("closeAria")}
         >
           ×
         </button>
@@ -119,10 +122,13 @@ return (
         <div className="modalContent">
           <div className="monsterPreview">
             <div className="monsterGlow"></div>
-            <img
+            <Image
               src={monster.image}
               alt={monster.name}
               className="modalMonsterImg"
+              width={480}
+              height={480}
+              sizes="150px"
             />
 
             <div className="monsterIdentity">
@@ -135,7 +141,7 @@ return (
             <p className="monsterDescription">{monster.description}</p>
 
             <div className="monsterSituations">
-              <p className="sectionTitle">常見情境：</p>
+              <p className="sectionTitle">{t("commonSituations")}</p>
               <ul>
                 {monster.situations?.map((situation, index) => (
                   <li key={index}>{situation}</li>
@@ -146,7 +152,7 @@ return (
             <form onSubmit={handleSubmit}>
               <textarea
                 className="moodTextarea"
-                placeholder="寫下你現在的感受..."
+                placeholder={t("placeholder")}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 maxLength={200}
@@ -156,7 +162,7 @@ return (
 
             <div className="radio-row">
               <span className="radio-question">
-                這顆情緒星要保留多久？
+                {t("keepQuestion")}
               </span>
 
               <label className="radio-option">
@@ -168,7 +174,7 @@ return (
                   onChange={(e) => setKeepType(e.target.value)}
                 />
                 <span className="custom-radio"></span>
-                限時 24 小時
+                {t("keep24h")}
               </label>
 
               <label className="radio-option">
@@ -180,27 +186,27 @@ return (
                   onChange={(e) => setKeepType(e.target.value)}
                 />
                 <span className="custom-radio"></span>
-                永久保留
+                {t("keepPermanent")}
               </label>
             </div>
 
               {error && <p className="errorText">{error}</p>}
 
               <button type="submit" className="submitButton" disabled={loading}>
-                {loading ? "送出中..." : "送出情緒星"}
+                {loading ? t("submitting") : t("submit")}
               </button>
 
               {loading && (
                 <p className="submitHint">
-                  小提醒：首次送出或一段時間未使用後，系統可能需要多等待幾秒，請稍候片刻 💫...
+                  {t("submitHint")}
                 </p>
               )}
             </form>
 
             <p className="footerText">
-              我們每個送進情緒宇宙的情緒都是匿名的喔✨
+              {t("footerLine1")}
               <br />
-              也去看看其他人今天送出了什麼情緒星吧 💖
+              {t("footerLine2")}
             </p>
           </div>
         </div>

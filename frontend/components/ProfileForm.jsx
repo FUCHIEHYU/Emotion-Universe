@@ -1,13 +1,15 @@
 "use client";
 
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import "./ProfileForm.css";
 
 const avatarOptions = [
-  "/assets/avatars/avatar1.png",
-  "/assets/avatars/avatar2.png",
-  "/assets/avatars/avatar3.png",
-  "/assets/avatars/avatar4.png",
-  "/assets/avatars/avatar5.png",
+  "/assets/avatars/avatar1.webp",
+  "/assets/avatars/avatar2.webp",
+  "/assets/avatars/avatar3.webp",
+  "/assets/avatars/avatar4.webp",
+  "/assets/avatars/avatar5.webp",
 ];
 
 export default function ProfileForm({
@@ -16,33 +18,42 @@ export default function ProfileForm({
   selectedAvatar,
   setSelectedAvatar,
   onSave,
-  saveButtonText = "儲存設定",
+  saveButtonText,
 }) {
+  const t = useTranslations("profileForm");
+
   return (
     <div className="profileFormCard">
       {/* 標題 */}
       <div className="profileFormHeader">
-        <h2 className="profileFormTitle">What's your mood today?</h2>
-        <h2 className="profileFormTitle">我的星旅人設定</h2>
+        <h2 className="profileFormTitle">{t("brandTitle")}</h2>
+        <h2 className="profileFormTitle">{t("title")}</h2>
         <p className="profileFormSubtitle">
-          替自己選一個頭貼，取一個名字，用匿名的方式在情緒宇宙中留下心情。
+          {t("subtitle")}
         </p>
       </div>
 
             {/* ⭐ 預覽（加分重點） */}
       <div className="profilePreview">
-        <p className="previewLabel">你的星旅人</p>
+        <p className="previewLabel">{t("previewLabel")}</p>
         <div className="previewBox">
-          <img src={selectedAvatar} className="previewAvatar" />
+          <Image
+            src={selectedAvatar}
+            alt={username || t("previewDefaultName")}
+            className="previewAvatar"
+            width={240}
+            height={240}
+            sizes="48px"
+          />
           <span className="previewName">
-            {username || "星旅人"}
+            {username || t("previewDefaultName")}
           </span>
         </div>
       </div>
 
       {/* 頭貼選擇 */}
       <div className="profileFormSection">
-        <label className="profileFormLabel">選擇你的頭貼</label>
+        <label className="profileFormLabel">{t("chooseAvatar")}</label>
         <div className="avatarGrid">
           {avatarOptions.map((avatar) => (
             <button
@@ -53,10 +64,13 @@ export default function ProfileForm({
               }`}
               onClick={() => setSelectedAvatar(avatar)}
             >
-              <img
+              <Image
                 src={avatar}
                 alt="avatar option"
                 className="avatarImage"
+                width={240}
+                height={240}
+                sizes="60px"
               />
             </button>
           ))}
@@ -66,11 +80,11 @@ export default function ProfileForm({
 
       {/* 名稱輸入 */}
       <div className="profileFormSection">
-        <label className="profileFormLabel">你的暱稱</label>
+        <label className="profileFormLabel">{t("nicknameLabel")}</label>
         <input
           type="text"
           className="profileFormInput"
-          placeholder="例如：星旅人小橘"
+          placeholder={t("nicknamePlaceholder")}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           maxLength={12}
@@ -79,14 +93,14 @@ export default function ProfileForm({
 
       {/* 說明 */}
       <div className="profileFormNotice">
-        <p>Tips: 這裡不會顯示你的真實身分，請安心的寫下你今天的心情與感受。</p>
-        <p>其他人只會看到你的頭貼與暱稱。</p>
-        <p>你可以隨時回到設定頁修改資料。</p>
+        <p>{t("notice1")}</p>
+        <p>{t("notice2")}</p>
+        <p>{t("notice3")}</p>
       </div>
 
       {/* 按鈕 */}
       <button className="profileFormSaveButton" onClick={onSave}>
-        {saveButtonText}
+        {saveButtonText || t("defaultSaveButton")}
       </button>
     </div>
   );

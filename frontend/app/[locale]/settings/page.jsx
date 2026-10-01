@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
-import ProfileForm from "../../components/ProfileForm";
+import { useTranslations } from "next-intl";
+import Navbar from "@/components/Navbar";
+import ProfileForm from "@/components/ProfileForm";
 
 export default function SettingsPage() {
+  const t = useTranslations("settingsPage");
   const [username, setUsername] = useState("");
-  const [selectedAvatar, setSelectedAvatar] = useState("/assets/avatars/avatar1.png");
+  const [selectedAvatar, setSelectedAvatar] = useState("/assets/avatars/avatar1.webp");
 
   useEffect(() => {
     const savedProfile = localStorage.getItem("userProfile");
@@ -14,13 +16,13 @@ export default function SettingsPage() {
     if (savedProfile) {
       const parsed = JSON.parse(savedProfile);
       setUsername(parsed.username || "");
-      setSelectedAvatar(parsed.avatar || "/assets/avatars/avatar1.png");
+      setSelectedAvatar(parsed.avatar || "/assets/avatars/avatar1.webp");
     }
   }, []);
 
   const handleSave = () => {
     if (!username.trim()) {
-      alert("請先輸入你的暱稱");
+      alert(t("nicknameRequired"));
       return;
     }
 
@@ -31,7 +33,7 @@ export default function SettingsPage() {
     };
 
     localStorage.setItem("userProfile", JSON.stringify(profile));
-    alert("設定已儲存！");
+    alert(t("saved"));
   };
 
   return (
@@ -51,7 +53,7 @@ export default function SettingsPage() {
           selectedAvatar={selectedAvatar}
           setSelectedAvatar={setSelectedAvatar}
           onSave={handleSave}
-          saveButtonText="儲存我的設定"
+          saveButtonText={t("saveButton")}
         />
       </main>
     </div>

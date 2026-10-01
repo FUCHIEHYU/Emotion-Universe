@@ -79,6 +79,19 @@
   width: 100%;
 }
 
+.localeSwitchButton {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(85, 52, 106, 0.18);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.localeSwitchButton:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
 /* 右上角使用者 */
 .navUser {
   display: flex;

@@ -1,11 +1,15 @@
+"use client";
+
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import "./WelcomeModal.css";
 
 const avatarOptions = [
-  "/assets/avatars/avatar1.png",
-  "/assets/avatars/avatar2.png",
-  "/assets/avatars/avatar3.png",
-  "/assets/avatars/avatar4.png",
-  "/assets/avatars/avatar5.png",
+  "/assets/avatars/avatar1.webp",
+  "/assets/avatars/avatar2.webp",
+  "/assets/avatars/avatar3.webp",
+  "/assets/avatars/avatar4.webp",
+  "/assets/avatars/avatar5.webp",
 ];
 
 export default function WelcomeModal({
@@ -15,19 +19,21 @@ export default function WelcomeModal({
   setSelectedAvatar,
   onStart,
 }) {
+  const t = useTranslations("welcomeModal");
+
   return (
     <div className="welcomeOverlay">
       <div className="welcomeWrapper">
-        <h1 className="welcomeSiteTitle">What&apos;s Your Mood Today?</h1>
+        <h1 className="welcomeSiteTitle">{t("siteTitle")}</h1>
 
         <div className="welcomeCard">
-          <h2 className="welcomeTitle">歡迎登入情緒宇宙</h2>
+          <h2 className="welcomeTitle">{t("title")}</h2>
           <p className="welcomeSubtitle">
-            選一個頭貼、取一個名字，開始你的匿名情緒旅程。
+            {t("subtitle")}
           </p>
 
           <div className="welcomeSection">
-            <label className="welcomeLabel">選擇你的頭貼</label>
+            <label className="welcomeLabel">{t("chooseAvatar")}</label>
             <div className="avatarGrid">
               {avatarOptions.map((avatar) => (
                 <button
@@ -38,18 +44,25 @@ export default function WelcomeModal({
                   }`}
                   onClick={() => setSelectedAvatar(avatar)}
                 >
-                  <img src={avatar} alt="avatar option" className="avatarImage" />
+                  <Image
+                    src={avatar}
+                    alt="avatar option"
+                    className="avatarImage"
+                    width={240}
+                    height={240}
+                    sizes="56px"
+                  />
                 </button>
               ))}
             </div>
           </div>
 
           <div className="welcomeSection">
-            <label className="welcomeLabel">你的暱稱</label>
+            <label className="welcomeLabel">{t("nicknameLabel")}</label>
             <input
               type="text"
               className="welcomeInput"
-              placeholder="例如：星旅人小橘"
+              placeholder={t("nicknamePlaceholder")}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               maxLength={12}
@@ -57,13 +70,13 @@ export default function WelcomeModal({
           </div>
 
           <div className="welcomeNotice">
-            <p>這裡不會顯示你的真實身分。</p>
-            <p>其他人只會看到你的頭貼與暱稱。</p>
-            <p>每一則心情都會成為宇宙中的一顆小星球。</p>
+            <p>{t("notice1")}</p>
+            <p>{t("notice2")}</p>
+            <p>{t("notice3")}</p>
           </div>
 
           <button className="welcomeStartButton" onClick={onStart}>
-            開始我的情緒旅程
+            {t("startButton")}
           </button>
         </div>
       </div>

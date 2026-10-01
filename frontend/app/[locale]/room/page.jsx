@@ -1,118 +1,77 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../../components/Navbar";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import Navbar from "@/components/Navbar";
 import "./room.css";
 
-const emotionData = [
-  {
-    key: "joy",
-    starName: "晴晴星",
-    name: "開心",
-    image: "/assets/monsters/monster_joy.png",
-    description: "當事情順利、被理解或感受到陪伴時，常常會出現開心的情緒。",
-    situations: ["和朋友聊天", "完成目標", "被稱讚"],
-    coping: ["記住這份快樂", "分享好心情", "允許自己享受當下"],
-  },
-  {
-    key: "sad",
-    starName: "雨雨星",
-    name: "難過",
-    image: "/assets/monsters/monster_sad.png",
-    description: "當失落、被忽略或受傷時，可能會感到難過。",
-    situations: ["被誤會", "關係改變", "事情不如預期"],
-    coping: ["允許自己難過", "找人傾訴", "寫下感受"],
-  },
-  {
-    key: "anger",
-    starName: "火火星",
-    name: "生氣",
-    image: "/assets/monsters/monster_anger.png",
-    description: "當界線被侵犯或感到不公平時，容易出現生氣。",
-    situations: ["被冒犯", "被忽略", "不公平對待"],
-    coping: ["深呼吸", "暫時離開情境", "表達感受"],
-  },
-  {
-    key: "fear",
-    starName: "霧霧星",
-    name: "害怕",
-    image: "/assets/monsters/monster_fear.png",
-    description: "面對未知或壓力時，會產生害怕的情緒。",
-    situations: ["考試", "未知環境", "壓力情境"],
-    coping: ["拆解問題", "尋求支持", "慢慢來"],
-  },
-  {
-    key: "surprise",
-    starName: "亮亮星",
-    name: "驚訝",
-    image: "/assets/monsters/monster_surprise.png",
-    description: "當事情出乎意料時，會感到驚訝。",
-    situations: ["突發事件", "意外消息", "突然改變"],
-    coping: ["先停一下", "理解狀況", "再做反應"],
-  },
-  {
-    key: "disgust",
-    starName: "淨淨星",
-    name: "厭惡",
-    image: "/assets/monsters/monster_disgust.png",
-    description: "當遇到讓人不舒服或反感的事物時，會感到厭惡。",
-    situations: ["不喜歡的氣味", "不舒服畫面", "排斥的行為"],
-    coping: ["離開不舒服來源", "保護自己界線"],
-  },
-];
+const EMOTION_KEYS = ["joy", "sad", "anger", "fear", "surprise", "disgust"];
 
+const EMOTION_IMAGES = {
+  joy: "/assets/monsters/monster_joy.webp",
+  sad: "/assets/monsters/monster_sad.webp",
+  anger: "/assets/monsters/monster_anger.webp",
+  fear: "/assets/monsters/monster_fear.webp",
+  surprise: "/assets/monsters/monster_surprise.webp",
+  disgust: "/assets/monsters/monster_disgust.webp",
+};
+
+// Keyword matching stays Chinese-only for now — the rule-based NLP core
+// (backend/nlp_service.py) hasn't been ported to English yet.
 const emotionKeywordMap = {
   joy: {
-    label: "開心",
     keywords: [
       "開心", "快樂", "高興", "幸福", "愉快", "雀躍", "興奮", "滿足", "欣慰", "期待"
     ],
   },
   sad: {
-    label: "難過",
     keywords: [
       "難過", "傷心", "悲傷", "低落", "失落", "想哭", "空虛", "無力", "委屈", "孤單", "寂寞", "失望", "心酸", "沮喪"
     ],
   },
   anger: {
-    label: "生氣",
     keywords: [
       "生氣", "憤怒", "火大", "不爽", "煩", "煩躁", "惱火", "暴躁", "氣憤", "不耐煩"
     ],
   },
   fear: {
-    label: "害怕",
     keywords: [
       "害怕", "怕", "恐懼", "緊張", "焦慮", "不安", "擔心", "驚慌", "壓力大", "忐忑"
     ],
   },
   surprise: {
-    label: "驚訝",
     keywords: [
       "驚訝", "意外", "突然", "震驚", "嚇到", "錯愕", "傻眼"
     ],
   },
   disgust: {
-    label: "厭惡",
     keywords: [
       "厭惡", "噁心", "反感", "討厭", "排斥", "嫌惡", "不舒服", "受不了", "厭煩"
     ],
   },
 };
 
-const upcomingEmotions = [
-  "期待星",
-  "羞羞星",
-  "孤孤星",
-  "焦焦星",
-  "委屈星",
-  "羨羨星",
-];
+function includesKeyword(search, keyword) {
+  return search.includes(keyword) || keyword.includes(search);
+}
 
 export default function RoomPage() {
+  const t = useTranslations("room");
   const [search, setSearch] = useState("");
 
-  // ⭐ 就放在這裡（取代舊的）
+  const emotionData = EMOTION_KEYS.map((key) => ({
+    key,
+    starName: t(`emotions.${key}.starName`),
+    name: t(`emotions.${key}.name`),
+    image: EMOTION_IMAGES[key],
+    description: t(`emotions.${key}.description`),
+    situations: t.raw(`emotions.${key}.situations`),
+    coping: t.raw(`emotions.${key}.coping`),
+  }));
+
+  const upcomingEmotions = t.raw("upcoming");
+
   const filtered = emotionData.filter((emotion) => {
     if (!search.trim()) return true;
 
@@ -129,16 +88,15 @@ export default function RoomPage() {
       <Navbar />
 
       <main className="roomPage">
-        <h1 className="roomTitle">情緒小百科</h1>
+        <h1 className="roomTitle">{t("title")}</h1>
 
         <p className="roomIntro">
-          本頁依據 Ekman 提出的六大基本情緒分類，
-          包含開心、難過、生氣、害怕、驚訝與厭惡。
+          {t("intro")}
         </p>
 
 
         <p className="roomSubtitle">
-          情緒沒有好壞，有時候我們也會同時擁有不只一種感受。
+          {t("subtitle")}
         </p>
 
 
@@ -157,10 +115,13 @@ export default function RoomPage() {
         </div>
 
         <div className="cardImageBox">
-          <img
+          <Image
             src={emotion.image}
             alt={emotion.starName}
             className="emotionImg"
+            width={480}
+            height={480}
+            sizes="95px"
           />
         </div>
 
@@ -176,7 +137,7 @@ export default function RoomPage() {
       <div className="cardBack cardFace">
         <div className="backTitleRow">
           <span>★</span>
-          <p>可能情境</p>
+          <p>{t("possibleSituations")}</p>
           <span>★</span>
         </div>
 
@@ -190,7 +151,7 @@ export default function RoomPage() {
 
         <div className="backTitleRow pink">
           <span>♥</span>
-          <p>可以試試</p>
+          <p>{t("tryThis")}</p>
           <span>♥</span>
         </div>
 
@@ -202,10 +163,13 @@ export default function RoomPage() {
           </ul>
         </div>
 
-        <img
+        <Image
           src={emotion.image}
           alt={emotion.starName}
           className="backCornerImg"
+          width={480}
+          height={480}
+          sizes="48px"
         />
       </div>
     </div>
@@ -216,15 +180,15 @@ export default function RoomPage() {
     <div key={i} className="lockedCard">
       <div className="lockedInner">
         <h3 className="lockedName">{name}</h3>
-        <p className="lockedTag">new emotion star</p>
-        <p className="lockedDesc">尚未解鎖，請期待窩...</p>
+        <p className="lockedTag">{t("lockedTag")}</p>
+        <p className="lockedDesc">{t("lockedDesc")}</p>
       </div>
     </div>
   ))}
 </div>
 
 <p className="roomEnding">
-  情緒有很多很多種，還有更多新的情緒星正在宇宙裡慢慢誕生中，請期待 ✦
+  {t("ending")}
 </p>
       </main>
     </>

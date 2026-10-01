@@ -1,25 +1,29 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import Navbar from "../../components/Navbar";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import Navbar from "@/components/Navbar";
 import "./cosmic-letter.css";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 
 // 強制告訴 Next.js 這個頁面不需要在編譯時預渲染
 export const dynamic = 'force-dynamic';
 
 function CosmicLetterContent() {
+  const t = useTranslations("cosmicLetter");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reply, setReply] = useState("");
-  const [sender, setSender] = useState("From：宇宙");
+  const [sender, setSender] = useState(`${t("senderPrefix")}${t("defaultSender")}`);
 
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const emotion = searchParams.get("emotion") || "happiness";
   const text = searchParams.get("text") || "";
-  const name = searchParams.get("name") || "宇宙";
+  const name = searchParams.get("name") || t("defaultSender");
 
   const handleToggleLetter = async () => {
     if (isOpen) {
@@ -28,7 +32,7 @@ function CosmicLetterContent() {
     }
 
     setIsOpen(true);
-    setSender(`From：${name}`);
+    setSender(`${t("senderPrefix")}${name}`);
 
     if (reply) return;
 
@@ -53,15 +57,15 @@ function CosmicLetterContent() {
       const data = await res.json();
 
       setTimeout(() => {
-        setReply(data.reply || "宇宙今天有點安靜，但它有收到你的心情。");
+        setReply(data.reply || t("fallbackReply"));
         setIsLoading(false);
       }, 900);
     } catch (error) {
       console.error("取得宇宙回信失敗：", error);
 
       setTimeout(() => {
-        setReply("宇宙暫時沒有收到訊號，請稍後再試一次。");
-        setSender("From：宇宙");
+        setReply(t("errorReply"));
+        setSender(`${t("senderPrefix")}${t("defaultSender")}`);
         setIsLoading(false);
       }, 900);
     }
@@ -77,16 +81,20 @@ function CosmicLetterContent() {
             type="button"
             className={`letter-main-button ${isOpen ? "is-open" : ""}`}
             onClick={handleToggleLetter}
-            aria-label={isOpen ? "收起宇宙回信" : "打開宇宙回信"}
+            aria-label={isOpen ? t("closeAria") : t("openAria")}
           >
-            <img
+            <Image
               src={
                 isOpen
-                  ? "/assets/letter/letter_open.png"
-                  : "/assets/letter/letter_close.png"
+                  ? "/assets/letter/letter_open.webp"
+                  : "/assets/letter/letter_close.webp"
               }
-              alt="宇宙回信"
+              alt={t("letterAlt")}
               className={`letter-main-image ${isLoading ? "is-loading" : ""}`}
+              width={1000}
+              height={695}
+              sizes="420px"
+              priority
             />
 
             {isOpen && (
@@ -94,7 +102,7 @@ function CosmicLetterContent() {
                 {isLoading ? (
                   <div className="letter-loading-block">
                     <p className="letter-loading-text">
-                      宇宙正在整理想對你說的話...
+                      {t("loadingText")}
                     </p>
                     <div className="letter-loading-dots">
                       <span></span>
@@ -113,7 +121,7 @@ function CosmicLetterContent() {
           </button>
 
           <p className="letter-page-hint">
-            {isOpen ? "點一下可收起這封信" : "請點擊打開 💌"}
+            {isOpen ? t("hintOpen") : t("hintClosed")}
           </p>
         </div>
 
@@ -121,7 +129,7 @@ function CosmicLetterContent() {
           className="backToUniverseBtn"
           onClick={() => router.push("/universe")}
         >
-          ← 返回情緒宇宙
+          {t("backToUniverse")}
         </button>
       </main>
     </>

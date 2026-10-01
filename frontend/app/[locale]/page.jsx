@@ -1,19 +1,19 @@
 "use client";
 
-console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
-
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import { useRouter } from "next/navigation";
-import MonsterGrid from "../components/MonsterGrid";
-import MoodModal from "../components/MoodModal";
-import LaunchTransition from "../components/LaunchTransition";
-import WelcomeModal from "../components/WelcomeModal";
+import { useTranslations } from "next-intl";
+import Navbar from "@/components/Navbar";
+import { useRouter } from "@/i18n/navigation";
+import MonsterGrid from "@/components/MonsterGrid";
+import MoodModal from "@/components/MoodModal";
+import LaunchTransition from "@/components/LaunchTransition";
+import WelcomeModal from "@/components/WelcomeModal";
 
 export default function HomePage() {
+  const t = useTranslations("home");
   const [showWelcome, setShowWelcome] = useState(false);
   const [username, setUsername] = useState("");
-  const [selectedAvatar, setSelectedAvatar] = useState("/assets/avatars/avatar1.png");
+  const [selectedAvatar, setSelectedAvatar] = useState("/assets/avatars/avatar1.webp");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMonster, setSelectedMonster] = useState(null);
@@ -31,13 +31,13 @@ export default function HomePage() {
     } else {
       const parsed = JSON.parse(savedProfile);
       setUsername(parsed.username || "");
-      setSelectedAvatar(parsed.avatar || "/assets/avatars/avatar1.png");
+      setSelectedAvatar(parsed.avatar || "/assets/avatars/avatar1.webp");
     }
   }, []);
 
   const handleStart = () => {
     if (!username.trim()) {
-      alert("請先輸入你的暱稱");
+      alert(t("nicknameRequired"));
       return;
     }
 
@@ -101,7 +101,7 @@ export default function HomePage() {
                 marginBottom: "14px",
               }}
             >
-              What&apos;s Your Mood Today?
+              {t("eyebrow")}
             </p>
 
             <h1
@@ -113,7 +113,7 @@ export default function HomePage() {
                 lineHeight: 1.1,
               }}
             >
-              今天的你，是哪一隻情緒小怪獸？
+              {t("heading")}
             </h1>
 
             <p
@@ -123,7 +123,7 @@ export default function HomePage() {
                 marginBottom: "20px",
               }}
             >
-              選擇你的情緒角色，寫下今天的心情，讓它飛進宇宙裡。
+              {t("subheading")}
             </p>
           </section>
 

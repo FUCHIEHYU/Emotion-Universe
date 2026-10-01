@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import Navbar from "@/components/Navbar";
+import { useRouter } from "@/i18n/navigation";
 import "./universe.css";
-import "../../components/LetterButton/letter-button.css";
+import "@/components/LetterButton/letter-button.css";
 
 
 
@@ -12,7 +14,7 @@ import "../../components/LetterButton/letter-button.css";
 function buildApiUrl(path) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8001";
   if (!API_URL) {
-    throw new Error("NEXT_PUBLIC_API_URL 尚未設定");
+    throw new Error("NEXT_PUBLIC_API_URL is not set");
   }
   return `${API_URL}${path}`;
 }
@@ -22,33 +24,45 @@ function getUserToken() {
   return localStorage.getItem("emotion_user_token") || "";
 }
 
-function mapEmotionToMonster(emotion) {
-  const map = {
-    happiness: "晴晴獸",
-    joy: "晴晴獸",
-    sad: "雨雨獸",
-    fear: "霧霧獸",
-    anger: "火火獸",
-    surprise: "亮亮獸",
-    disgust: "淨淨獸",
-  };
-  return map[emotion] || "未知情緒";
-}
+const EMOTION_TO_MONSTER_KEY = {
+  happiness: "joy",
+  joy: "joy",
+  sad: "sad",
+  fear: "fear",
+  anger: "anger",
+  surprise: "surprise",
+  disgust: "disgust",
+};
 
 function getStarImage(emotion) {
   const map = {
-    happiness: "/assets/monsters/monster_joy.png",
-    joy: "/assets/monsters/monster_joy.png",
-    sad: "/assets/monsters/monster_sad.png",
-    fear: "/assets/monsters/monster_fear.png",
-    anger: "/assets/monsters/monster_anger.png",
-    surprise: "/assets/monsters/monster_surprise.png",
-    disgust: "/assets/monsters/monster_disgust.png",
+    happiness: "/assets/monsters/monster_joy.webp",
+    joy: "/assets/monsters/monster_joy.webp",
+    sad: "/assets/monsters/monster_sad.webp",
+    fear: "/assets/monsters/monster_fear.webp",
+    anger: "/assets/monsters/monster_anger.webp",
+    surprise: "/assets/monsters/monster_surprise.webp",
+    disgust: "/assets/monsters/monster_disgust.webp",
   };
-  return map[emotion] || "/assets/monsters/monster_joy.png";
+  return map[emotion] || "/assets/monsters/monster_joy.webp";
 }
 
-function StarDetailModal({ mood, onClose, onDelete, onEdit, onReply }) {
+// Maps an error code returned by the backend to a localized message.
+// Falls back to the raw message (or a generic one) for anything unmapped,
+// so an unexpected backend error string still shows something readable.
+function translateApiError(t, payload, fallbackKey) {
+  const code = payload?.code;
+  if (code) {
+    try {
+      return t(`errors.${code}`);
+    } catch {
+      // fall through to fallback below
+    }
+  }
+  return payload?.message || t(fallbackKey);
+}
+
+function StarDetailModal({ mood, onClose, onDelete, onEdit, onReply, t }) {
   if (!mood) return null;
 
   return (
@@ -63,29 +77,38 @@ function StarDetailModal({ mood, onClose, onDelete, onEdit, onReply }) {
           className="modalLetterNoticeCard"
           onClick={() => onReply(mood)}
         >
-          <img
-            src="/assets/letter/letter_close.png"
-            alt="宇宙回信"
+          <Image
+            src="/assets/letter/letter_close.webp"
+            alt={t("starImageAlt")}
             className="modalLetterNoticeImage"
+            width={1000}
+            height={695}
+            sizes="100px"
           />
-          <p className="modalLetterNoticeText">宇宙回信 💌</p>
+          <p className="modalLetterNoticeText">{t("modalLetterText")}</p>
         </button>
 
         <div className="starModalTop">
-          <img
+          <Image
             src={getStarImage(mood.emotion)}
             alt={mood.starName}
             className="starModalImage"
+            width={480}
+            height={480}
+            sizes="92px"
           />
 
           <div className="starModalInfo">
             <h2 className="starModalName">{mood.starName}</h2>
 
             <div className="starAuthorRow">
-              <img
+              <Image
                 src={mood.avatar}
                 alt={mood.authorName}
                 className="starAvatar"
+                width={240}
+                height={240}
+                sizes="36px"
               />
               <span className="starAuthorText">{mood.authorName}</span>
             </div>
@@ -100,7 +123,7 @@ function StarDetailModal({ mood, onClose, onDelete, onEdit, onReply }) {
           {mood.createdAt}
           <br />
           <small>
-            {mood.keepType === "permanent" ? "永久保留" : "24 小時限時"}
+            {mood.keepType === "permanent" ? t("keepPermanent") : t("keep24h")}
           </small>
         </div>
 
@@ -109,16 +132,16 @@ function StarDetailModal({ mood, onClose, onDelete, onEdit, onReply }) {
         {mood.isMine && (
           <div className="ownerActionRow">
             <button className="editMoodButton" onClick={() => onEdit(mood)}>
-              編輯
+              {t("edit")}
             </button>
 
             <button
               className="deleteMoodButton"
               onClick={() => onDelete(mood.id)}
             >
-              刪除這顆情緒星
+              {t("deleteStar")}
             </button>
-  
+
           </div>
         )}
       </div>
@@ -174,6 +197,8 @@ function generatePositions(count) {
 }
 
 export default function UniversePage() {
+  const t = useTranslations("universe");
+  const tMonsters = useTranslations("monsters");
   const router = useRouter();
   const [moods, setMoods] = useState([]);
   const [selectedMood, setSelectedMood] = useState(null);
@@ -184,6 +209,11 @@ export default function UniversePage() {
   const [loading, setLoading] = useState(true);
   const [isWaking, setIsWaking] = useState(false);
   const [loadError, setLoadError] = useState(false);
+
+  const mapEmotionToMonster = (emotion) => {
+    const key = EMOTION_TO_MONSTER_KEY[emotion];
+    return key ? tMonsters(`${key}.name`) : t("unknownEmotion");
+  };
 
   useEffect(() => {
   const savedNewMoodId = localStorage.getItem("new_mood_id");
@@ -259,19 +289,19 @@ useEffect(() => {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || "刪除失敗");
+      if (!res.ok || data.code) {
+        throw new Error(translateApiError(t, data, "deleteFailedFallback"));
       }
 
       setMoods((prev) => prev.filter((mood) => mood.id !== moodId));
       setSelectedMood(null);
     } catch (error) {
       console.error("刪除失敗：", error);
-      alert(error.message || "刪除失敗");
+      alert(error.message || t("deleteFailedFallback"));
     }
   };
 
-  
+
 
   const handleStartEdit = (mood) => {
     setEditingMood(mood);
@@ -298,8 +328,8 @@ useEffect(() => {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || "更新失敗");
+      if (!res.ok || data.code) {
+        throw new Error(translateApiError(t, data, "updateFailedFallback"));
       }
 
       setMoods((prev) =>
@@ -327,7 +357,7 @@ useEffect(() => {
       setEditingMood(null);
     } catch (error) {
       console.error("更新失敗：", error);
-      alert(error.message || "更新失敗");
+      alert(error.message || t("updateFailedFallback"));
     }
   };
 
@@ -335,7 +365,7 @@ const handleGoToLetterPage = (mood) => {
   router.push(
     `/cosmic-letter?emotion=${mood.emotion}&text=${encodeURIComponent(
       mood.content
-    )}&name=${encodeURIComponent(mood.starName || "宇宙")}`
+    )}&name=${encodeURIComponent(mood.starName || t("eyebrow"))}`
   );
 };
 
@@ -365,16 +395,16 @@ const handleGoToLetterPage = (mood) => {
 
 
         <section className="universeHero">
-          <p className="universeEyebrow">EMOTION UNIVERSE</p>
+          <p className="universeEyebrow">{t("eyebrow")}</p>
           <h1 className="universeTitle">
-            漂浮在宇宙裡的，是大家今天的情緒星
+            {t("title")}
           </h1>
           <p className="universeDesc">
-            點開其中一顆，看看它來自哪位匿名旅人，以及那一刻留下的心情。
+            {t("desc")}
           </p>
           <div className="stats-pill">
             <p className="universeStats">
-              目前有 <span>{moods.length}</span> 顆星星在宇宙閃耀著 ✨
+              {t("statsText", { count: moods.length })}
             </p>
           </div>
 
@@ -382,14 +412,17 @@ const handleGoToLetterPage = (mood) => {
             className="letterNoticeCard"
             onClick={() => router.push("/cosmic-letter")}
           >
-            <img
-              src="/assets/letter/letter_close.png"
-              alt="宇宙回信提示"
+            <Image
+              src="/assets/letter/letter_close.webp"
+              alt={t("letterAlt")}
               className="letterNoticeImage"
+              width={1000}
+              height={695}
+              sizes="120px"
             />
 
             <p className="letterNoticeText">
-              點擊情緒星你收到宇宙回信囉! 💌
+              {t("letterNoticeText")}
             </p>
           </button>
 
@@ -413,10 +446,12 @@ const handleGoToLetterPage = (mood) => {
               }}
               onClick={() => setSelectedMood(mood)}
             >
-              <img
+              <Image
                 src={getStarImage(mood.emotion)}
                 alt={mood.starName}
                 className="floatingStarImg"
+                fill
+                sizes="106px"
               />
             </button>
           ))}
@@ -428,6 +463,7 @@ const handleGoToLetterPage = (mood) => {
           onDelete={handleDeleteMood}
           onEdit={handleStartEdit}
           onReply={handleGoToLetterPage}
+          t={t}
         />
 
         {editingMood && (
@@ -443,7 +479,7 @@ const handleGoToLetterPage = (mood) => {
                 ×
               </button>
 
-              <h2 className="starModalName">編輯你的情緒星</h2>
+              <h2 className="starModalName">{t("editTitle")}</h2>
 
               <div className="starModalContent">
                 <textarea
@@ -463,7 +499,7 @@ const handleGoToLetterPage = (mood) => {
                     checked={editKeepType === "24h"}
                     onChange={(e) => setEditKeepType(e.target.value)}
                   />
-                  限時 24 小時
+                  {t("keepQuestionOption24h")}
                 </label>
 
                 <label>
@@ -474,12 +510,12 @@ const handleGoToLetterPage = (mood) => {
                     checked={editKeepType === "permanent"}
                     onChange={(e) => setEditKeepType(e.target.value)}
                   />
-                  永久保留
+                  {t("keepQuestionOptionPermanent")}
                 </label>
               </div>
 
               <button className="editMoodButton" onClick={handleUpdateMood}>
-                儲存修改
+                {t("saveEdit")}
               </button>
             </div>
           </div>
@@ -489,7 +525,7 @@ const handleGoToLetterPage = (mood) => {
 
 
 
-          
+
         )}
 
           {/* 🌀 loading */}
@@ -497,21 +533,21 @@ const handleGoToLetterPage = (mood) => {
               isWaking ? (
                 <div className="toastWrapper" key="warming">
                   <div className="warmupBanner">
-                    <span className="animatedText">宇宙中心正在暖機中 🚀</span>
-                    由於使用雲端免費服務，首次啟動約需 15–30 秒，感謝您的耐心等待！
+                    <span className="animatedText">{t("warmingText")}</span>
+                    {t("warmingHint")}
                   </div>
                 </div>
               ) : (
                 <div className="toastWrapper" key="loading">
                   <div className="statusBanner">
-                    <span className="animatedText">🌠 正在連接情緒宇宙中...</span>
+                    <span className="animatedText">{t("connectingText")}</span>
                   </div>
                 </div>
               )
             ) : loadError ? (
               <div className="toastWrapper" key="error">
                 <div className="errorBanner">
-                  目前宇宙連線較慢，可能正在喚醒伺服器或資料庫，請稍後重新整理。
+                  {t("errorText")}
                 </div>
               </div>
             ) : null}
@@ -519,7 +555,7 @@ const handleGoToLetterPage = (mood) => {
 
       </main>
     </>
-    
+
   );
-  
+
 }

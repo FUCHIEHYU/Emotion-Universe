@@ -1,0 +1,282 @@
+{
+  "metadata": {
+    "title": "What's Your Mood Today",
+    "description": "情緒宇宙"
+  },
+  "nav": {
+    "logoText": "情緒宇宙 | EMOTION UNIVERSE",
+    "home": "首頁",
+    "universe": "情緒宇宙",
+    "room": "情緒小百科",
+    "about": "關於我們",
+    "localeSwitch": "EN"
+  },
+  "home": {
+    "eyebrow": "What's Your Mood Today?",
+    "heading": "今天的你，是哪一隻情緒小怪獸？",
+    "subheading": "選擇你的情緒角色，寫下今天的心情，讓它飛進宇宙裡。",
+    "nicknameRequired": "請先輸入你的暱稱"
+  },
+  "welcomeModal": {
+    "siteTitle": "What's Your Mood Today?",
+    "title": "歡迎登入情緒宇宙",
+    "subtitle": "選一個頭貼、取一個名字，開始你的匿名情緒旅程。",
+    "chooseAvatar": "選擇你的頭貼",
+    "nicknameLabel": "你的暱稱",
+    "nicknamePlaceholder": "例如：星旅人小橘",
+    "notice1": "這裡不會顯示你的真實身分。",
+    "notice2": "其他人只會看到你的頭貼與暱稱。",
+    "notice3": "每一則心情都會成為宇宙中的一顆小星球。",
+    "startButton": "開始我的情緒旅程"
+  },
+  "profileForm": {
+    "brandTitle": "What's your mood today?",
+    "title": "我的星旅人設定",
+    "subtitle": "替自己選一個頭貼，取一個名字，用匿名的方式在情緒宇宙中留下心情。",
+    "previewLabel": "你的星旅人",
+    "previewDefaultName": "星旅人",
+    "chooseAvatar": "選擇你的頭貼",
+    "nicknameLabel": "你的暱稱",
+    "nicknamePlaceholder": "例如：星旅人小橘",
+    "notice1": "Tips: 這裡不會顯示你的真實身分，請安心的寫下你今天的心情與感受。",
+    "notice2": "其他人只會看到你的頭貼與暱稱。",
+    "notice3": "你可以隨時回到設定頁修改資料。",
+    "defaultSaveButton": "儲存設定"
+  },
+  "settingsPage": {
+    "saveButton": "儲存我的設定",
+    "nicknameRequired": "請先輸入你的暱稱",
+    "saved": "設定已儲存！"
+  },
+  "monsters": {
+    "joy": {
+      "name": "晴晴獸",
+      "label": "快樂 happiness",
+      "description": "當你感到輕鬆、開心，一切都剛剛好的時候，晴晴獸會出現。",
+      "situations": ["和朋友聊天很開心", "完成一件讓自己滿意的事情", "享受生活中的小確幸"]
+    },
+    "sad": {
+      "name": "雨雨獸",
+      "label": "悲傷 Sadness",
+      "description": "當你感到低落、失落，或有點難過時，雨雨獸會陪在你身邊。",
+      "situations": ["事情沒有如預期發展", "感到孤單或被忽略", "回想起難過的事情"]
+    },
+    "fear": {
+      "name": "霧霧獸",
+      "label": "恐懼 Fear",
+      "description": "當你感到不安、緊張，對未知感到害怕時，霧霧獸會出現。",
+      "situations": ["面對未知的挑戰", "擔心未來的不確定", "需要做重要決定時"]
+    },
+    "anger": {
+      "name": "火火獸",
+      "label": "憤怒 Anger",
+      "description": "當你感到不公平、被冒犯或壓力爆發時，火火獸會出現。",
+      "situations": ["被誤解或不被理解", "事情不如預期", "壓力累積太久"]
+    },
+    "surprise": {
+      "name": "亮亮獸",
+      "label": "驚訝 Surprise",
+      "description": "當事情突然發生或出乎意料時，亮亮獸會閃閃出現。",
+      "situations": ["收到意想不到的消息", "被朋友驚喜到", "發現新事物"]
+    },
+    "disgust": {
+      "name": "淨淨獸",
+      "label": "厭惡 Disgust",
+      "description": "當你感到排斥、不舒服或想遠離某些事物時，淨淨獸會出現。",
+      "situations": ["遇到不喜歡的人事物", "感到不舒服的環境", "內心產生排斥感"]
+    }
+  },
+  "moodModal": {
+    "closeAria": "關閉",
+    "commonSituations": "常見情境：",
+    "placeholder": "寫下你現在的感受...",
+    "keepQuestion": "這顆情緒星要保留多久？",
+    "keep24h": "限時 24 小時",
+    "keepPermanent": "永久保留",
+    "submit": "送出情緒星",
+    "submitting": "送出中...",
+    "submitHint": "小提醒：首次送出或一段時間未使用後，系統可能需要多等待幾秒，請稍候片刻 💫...",
+    "footerLine1": "我們每個送進情緒宇宙的情緒都是匿名的喔✨",
+    "footerLine2": "也去看看其他人今天送出了什麼情緒星吧 💖",
+    "errorEmpty": "請先寫下你現在的感受",
+    "errorSubmitFailed": "送出失敗，請稍後再試"
+  },
+  "launchTransition": {
+    "flameAlt": "尾焰",
+    "shipAlt": "情緒星船",
+    "text": "情緒星正在飛向宇宙..."
+  },
+  "room": {
+    "title": "情緒小百科",
+    "intro": "本頁依據 Ekman 提出的六大基本情緒分類，包含開心、難過、生氣、害怕、驚訝與厭惡。",
+    "subtitle": "情緒沒有好壞，有時候我們也會同時擁有不只一種感受。",
+    "possibleSituations": "可能情境",
+    "tryThis": "可以試試",
+    "lockedTag": "new emotion star",
+    "lockedDesc": "尚未解鎖，請期待窩...",
+    "ending": "情緒有很多很多種，還有更多新的情緒星正在宇宙裡慢慢誕生中，請期待 ✦",
+    "upcoming": ["期待星", "羞羞星", "孤孤星", "焦焦星", "委屈星", "羨羨星"],
+    "emotions": {
+      "joy": {
+        "starName": "晴晴星",
+        "name": "開心",
+        "description": "當事情順利、被理解或感受到陪伴時，常常會出現開心的情緒。",
+        "situations": ["和朋友聊天", "完成目標", "被稱讚"],
+        "coping": ["記住這份快樂", "分享好心情", "允許自己享受當下"]
+      },
+      "sad": {
+        "starName": "雨雨星",
+        "name": "難過",
+        "description": "當失落、被忽略或受傷時，可能會感到難過。",
+        "situations": ["被誤會", "關係改變", "事情不如預期"],
+        "coping": ["允許自己難過", "找人傾訴", "寫下感受"]
+      },
+      "anger": {
+        "starName": "火火星",
+        "name": "生氣",
+        "description": "當界線被侵犯或感到不公平時，容易出現生氣。",
+        "situations": ["被冒犯", "被忽略", "不公平對待"],
+        "coping": ["深呼吸", "暫時離開情境", "表達感受"]
+      },
+      "fear": {
+        "starName": "霧霧星",
+        "name": "害怕",
+        "description": "面對未知或壓力時，會產生害怕的情緒。",
+        "situations": ["考試", "未知環境", "壓力情境"],
+        "coping": ["拆解問題", "尋求支持", "慢慢來"]
+      },
+      "surprise": {
+        "starName": "亮亮星",
+        "name": "驚訝",
+        "description": "當事情出乎意料時，會感到驚訝。",
+        "situations": ["突發事件", "意外消息", "突然改變"],
+        "coping": ["先停一下", "理解狀況", "再做反應"]
+      },
+      "disgust": {
+        "starName": "淨淨星",
+        "name": "厭惡",
+        "description": "當遇到讓人不舒服或反感的事物時，會感到厭惡。",
+        "situations": ["不喜歡的氣味", "不舒服畫面", "排斥的行為"],
+        "coping": ["離開不舒服來源", "保護自己界線"]
+      }
+    }
+  },
+  "universe": {
+    "eyebrow": "EMOTION UNIVERSE",
+    "title": "漂浮在宇宙裡的，是大家今天的情緒星",
+    "desc": "點開其中一顆，看看它來自哪位匿名旅人，以及那一刻留下的心情。",
+    "statsText": "目前有 {count} 顆星星在宇宙閃耀著 ✨",
+    "letterNoticeText": "點擊情緒星你收到宇宙回信囉! 💌",
+    "letterAlt": "宇宙回信提示",
+    "starImageAlt": "宇宙回信",
+    "modalLetterText": "宇宙回信 💌",
+    "keepPermanent": "永久保留",
+    "keep24h": "24 小時限時",
+    "edit": "編輯",
+    "deleteStar": "刪除這顆情緒星",
+    "editTitle": "編輯你的情緒星",
+    "keepQuestionOption24h": "限時 24 小時",
+    "keepQuestionOptionPermanent": "永久保留",
+    "saveEdit": "儲存修改",
+    "warmingText": "宇宙中心正在暖機中 🚀",
+    "warmingHint": "由於使用雲端免費服務，首次啟動約需 15–30 秒，感謝您的耐心等待！",
+    "connectingText": "🌠 正在連接情緒宇宙中...",
+    "errorText": "目前宇宙連線較慢，可能正在喚醒伺服器或資料庫，請稍後重新整理。",
+    "deleteFailedFallback": "刪除失敗",
+    "updateFailedFallback": "更新失敗",
+    "backToUniverse": "← 返回情緒宇宙",
+    "unknownEmotion": "未知情緒"
+  },
+  "cosmicLetter": {
+    "openAria": "打開宇宙回信",
+    "closeAria": "收起宇宙回信",
+    "letterAlt": "宇宙回信",
+    "loadingText": "宇宙正在整理想對你說的話...",
+    "hintOpen": "點一下可收起這封信",
+    "hintClosed": "請點擊打開 💌",
+    "defaultSender": "宇宙",
+    "senderPrefix": "From：",
+    "fallbackReply": "宇宙今天有點安靜，但它有收到你的心情。",
+    "errorReply": "宇宙暫時沒有收到訊號，請稍後再試一次。",
+    "backToUniverse": "← 返回情緒宇宙"
+  },
+  "errors": {
+    "MOOD_NOT_FOUND": "找不到這顆情緒星",
+    "NOT_OWNER_DELETE": "你不能刪除別人的情緒星",
+    "NOT_OWNER_EDIT": "你不能編輯別人的情緒星",
+    "UNKNOWN": "發生錯誤，請稍後再試"
+  },
+  "about": {
+    "heroTitle": "關於 Emotion Universe",
+    "heroSubtitle": "透過互動與視覺化，結合SEL幫助理解情緒與表達感受的互動式網站",
+    "introTitle": "網頁介紹",
+    "introLead1": "Emotion Universe 是一個結合",
+    "introLeadStrong": "社會情緒學習（SEL, Social and Emotional Learning）",
+    "introLead2": "概念的互動式網站，透過",
+    "introLeadStrong2": "視覺化設計讓使用者理解自己與他人的情緒",
+    "introLead3": "。",
+    "introBody1": "網站透過情緒小怪獸、匿名分享機制與宇宙式互動場景，幫助孩子探索內在感受、表達情緒，並在觀看他人故事的過程中，自然練習理解、同理與共感。",
+    "introHighlightPre": "我們希望這不只是一個記錄心情的工具，而是一個能",
+    "introHighlightStrong": "讓孩子安心感受自己、學習理解他人的數位情緒學習空間",
+    "introHighlightPost": "。",
+    "conceptTitle": "核心教育概念",
+    "conceptBody1Pre": "社會情緒學習（SEL, Social Emotional Learning）SEL是一種針對",
+    "conceptBody1Strong": "孩子社交及情緒管理",
+    "conceptBody1Mid": "為重點的教育方式。由美國「課業、社交與情緒學習組織」（CASEL）提出的概念，是情緒教育的一種，包含",
+    "conceptBody1Strong2": "理解自己和他人的情緒、處理壓力、同理與社交能力",
+    "conceptBody1Post": "。",
+    "conceptBody2Pre": "Emotion Universe 希望透過情緒紀錄、匿名分享與情緒宇宙互動，讓孩子在自然參與的過程中，逐步建立情緒理解與社會互動能力，",
+    "conceptBody2Strong": "讓情緒教育不只是被說明，而是能被看見、被感受、被練習",
+    "conceptBody2Post": "。",
+    "featuresTitle": "核心功能",
+    "featuresIntro": "以下功能設計皆結合 SEL 社會情緒學習概念，讓孩子在互動中自然練習情緒理解與表達。",
+    "featuresNote": "✦小提醒：目前網站使用雲端免費伺服器，首次送出或閒置後重新操作時，可能需要等待幾秒，屬正常情況。",
+    "feature1Title": "情緒選擇與分類",
+    "feature1Text": "匿名情緒紀錄與分享，可選限時或永久停留公開宇宙。",
+    "feature1Sel": "SEL｜自我覺察",
+    "feature2Title": "情緒小百科",
+    "feature2Text": "以卡牌呈現，透過視覺化理解不同情緒。",
+    "feature2Sel": "SEL｜自我覺察・社會覺察",
+    "feature3Title": "情緒宇宙",
+    "feature3Text": "互動瀏覽他人情緒。系統提供情緒資料保存機制，使用者可選擇將情緒星體儲存為「24小時」或「永久保存」。",
+    "feature3Sel": "SEL｜社會覺察",
+    "feature4Title": "宇宙回信",
+    "feature4Text": "透過NLP分析情緒日記，再使用AI 回應情緒與感受。",
+    "feature4Sel": "SEL｜自我管理",
+    "techTitle": "技術架構",
+    "tech1Title": "Next.js + React",
+    "tech1Line1": "使用 App Router 建立頁面架構",
+    "tech1Line2": "以 React hooks 管理互動狀態（如 useState / useEffect）",
+    "tech1Line3": "負責前端畫面與後端 API 串接",
+    "tech2Title": "FastAPI",
+    "tech2Line1": "建立 /moods、/reply 等 API 端點",
+    "tech2Line2": "處理情緒資料與回覆邏輯",
+    "tech2Line3": "作為前端與資料庫之間的服務層",
+    "tech3Title": "MySQL",
+    "tech3Line1": "設計情緒資料的基本表結構",
+    "tech3Line2": "撰寫查詢與篩選條件",
+    "tech3Line3": "依需求設定資料保存與顯示規則",
+    "tech4Title": "NLP 情緒分析",
+    "tech4Line1Strong": "rule-based-NLP 情緒分析 ",
+    "tech4Line1Rest": "進行情緒分析",
+    "tech4Line2": "判斷情緒、情境、需求與強度等欄位",
+    "tech4Line3": "不依賴外部付費 API",
+    "tech5Title": "自製素材 + 視覺設計",
+    "tech5Line1": "角色、星體等視覺素材自行設計",
+    "tech5Line2": "製作 CSS 動畫效果（如漂浮、信封互動）",
+    "tech5Line3": "整合視覺設計與前端實作",
+    "tech6Title": "雲端部署",
+    "tech6Line1Strong": "Vercel",
+    "tech6Line1Rest": "部署前端",
+    "tech6Line2Strong": "Render",
+    "tech6Line2Rest": "部署 FastAPI 與 MySQL",
+    "tech6Line3": "前端改為連接雲端 API 與雲端資料服務",
+    "impactTitle": "我們希望帶來的影響",
+    "impactBody1": "在 Emotion Universe 中，每一份情緒都像宇宙中的一顆星體，都值得被看見、被理解。",
+    "impactBody2": "我們希望孩子在這個空間裡，不只學會說出「我現在怎麼了」，也能慢慢理解「原來別人也有不同的感受」，進而培養更深的自我理解、同理心與情緒表達能力。",
+    "contactTitle": "聯絡我們",
+    "contactBody": "我們很關心使用者的體驗，如有遇到任何問題歡迎聯絡我們。",
+    "contactEmail": "Email：fchiehyu@gmail.com",
+    "footer": "© 2026 Emotion Universe. | FUCHIEHYU 專為情緒星探索者設計 💖"
+  }
+}
